@@ -43,9 +43,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use brightnessctl to adjust backlight
 #set $brightness_i3status_update awk -F ',' '{print $4}' <<< $(brightnessctl -m) > $HOME/.config/brightness 
-exec_always awk -F ',' '{print $4}' <<< $(brightnessctl -m) > $HOME/.config/brightness 
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && $refresh_i3status
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && $refresh_i3status
+exec_always echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness 
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
