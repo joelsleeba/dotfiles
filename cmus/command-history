@@ -1,0 +1,51 @@
+set mixer.alsa.channel=master
+set mixer.alsa.device=default
+set dsp.alsa.device=default
+set output_plugin=alsa
+q
+qa
+set output_plugin=pulse
+set output_plugin alsa
+set output_plugin pipewire
+output_plugin pipewire
+set ouput_plugin=alsa
+set -
+set output_plugin=pipewire
+set mpris=true
+set mpris true
+wq
+colorscheme gruvbox-alt
+colorscheme gruvbox
+colorscheme gruvbox-warm
+live-filter 
+exit
+help
+colorscheme j
+add /home/joel/Music/
+update
+select
+pl-create Study
+Q
+colorscheme amazon
+colorscheme solarized-dark
+colorscheme cyan
+next
+ a
+a
+search malargal
+quit
+shuffle
+up
+down
+colorscheme spotify
+colorscheme solarized-light
+colorscheme night
+colorscheme jellybeans
+colorscheme green
+colorscheme gray-88
+colorscheme default
+colorscheme 
+colorscheme dracula
+colorscheme tango
+colorscheme
+add ~/Music/
