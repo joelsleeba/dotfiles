@@ -62,7 +62,7 @@ memory {
 read_file BRIGHTNESS {
 	format = " %content%"
 	path = "/tmp/brightness"
-	max_characters = 5
+	max_characters = 3
 }
 
 volume master {
