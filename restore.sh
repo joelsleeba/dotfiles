@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if [[ -e ./i3 ]];
+then
+	cp -r ./i3 $HOME/.config/ 
+fi
+
+if [[ -e $HOME/.config/i3status ]];
+then
+	cp -r ./i3status $HOME/.config/
+fi
+
+if [[ -e ./kitty ]];
+then
+	cp -r ./kitty $HOME/.config/
+fi
+
+if [[ -e ./rofi ]];
+then
+	cp -r ./rofi $HOME/.config/
+fi
+
+if [[ -e ./nvim ]];
+then
+	cp -r ./nvim $HOME/.config/
+fi
+
+if [[ -e ./cmus ]];
+then
+	cp -r ./cmus $HOME/.config/
+fi
+
+if [[ -e ./.p10k.zsh ]];
+then
+	cp ./.p10k.zsh $HOME/.p10k.zsh
+fi
+
+if [[ -e ./.bashrc ]];
+then
+	cp ./bashrc $HOME/.bashrc 
+fi
+
+if [[ -e ./.zshrc ]];
+then
+	cp ./.zshrc $HOME/.zshrc
+fi
+
+
+
+
+
