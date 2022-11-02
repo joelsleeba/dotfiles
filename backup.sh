@@ -30,6 +30,11 @@ then
 	cp -r $HOME/.config/cmus ./
 fi
 
+if [[ -e $HOME/.config/ranger ]];
+then
+	cp -r $HOME/.config/ranger ./
+fi
+
 if [[ -e $HOME/.p10k.zsh ]];
 then
 	cp $HOME/.p10k.zsh ./
