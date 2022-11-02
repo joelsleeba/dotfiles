@@ -40,6 +40,10 @@ then
 	cp -r ./uncrustify $HOME/.config/
 fi
 
+if [[ -e ./sioyek ]];
+then
+	cp -r ./sioyek $HOME/.config/
+fi
 
 if [[ -e ./.p10k.zsh ]];
 then
