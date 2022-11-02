@@ -35,6 +35,11 @@ then
 	cp -r $HOME/.config/ranger ./
 fi
 
+if [[ -e $HOME/.config/uncrustify ]];
+then
+	cp -r $HOME/.config/uncrustify ./
+fi
+
 if [[ -e $HOME/.p10k.zsh ]];
 then
 	cp $HOME/.p10k.zsh ./
@@ -49,8 +54,3 @@ if [[ -e $HOME/.zshrc ]];
 then
 	cp $HOME/.zshrc ./
 fi
-
-
-
-
-
