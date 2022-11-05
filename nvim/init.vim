@@ -1,8 +1,5 @@
 call plug#begin()
 
-" some random plugin that was in vim-plugin page
-Plug 'tpope/vim-sensible'
-
 " vimtex
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
@@ -33,16 +30,20 @@ let UNCRUSTIFY_CONFIG="$HOME/.config/uncrustify/uncrustify.cfg"
 Plug 'mboughaba/i3config.vim'
 
 " For the sidebar file explorer
-Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
 
 " gruvbox theme for nvim
 Plug 'morhetz/gruvbox'
 
 call plug#end()
 
+" Keymaps
+nnoremap <C-n> :NvimTreeToggle<CR>
+
 " for line numbers
 set number
 set foldmethod=indent
 colorscheme gruvbox
+:lua require'nvim-tree'.setup()
 
