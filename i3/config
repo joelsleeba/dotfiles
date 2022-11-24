@@ -48,8 +48,12 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Use brightnessctl to adjust backlight
 exec_always echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness 
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+ && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- && echo "$(cat /sys/class/backlight/intel_backlight/actual_brightness)*100/$(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc > /tmp/brightness && $refresh_i3status
+
+# Redshift shortcuts
+bindsym $mod+Shift+n exec --no-startup-id redshift -O 3500K -r -P
+bindsym $mod+Shift+d exec --no-startup-id redshift -O 6500K -r -P
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -218,7 +222,7 @@ bindsym $mod+Ctrl+Shift+s+n exec --no-startup-id shutdown now
 bindsym $mod+F1 exec kitty
 bindsym $mod+F2 exec firefox
 #bindsym $mod+F3 exec ranger
-#bindsym $mod+F4 exec cmus
+bindsym $mod+F4 exec i3-msg 'workspace $ws4; exec kitty cmus'
 bindsym $mod+F5 exec vlc
 bindsym $mod+F6 exec foliate 
 bindsym $mod+F7 exec sioyek

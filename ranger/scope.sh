@@ -146,7 +146,7 @@ handle_image() {
             ## needs rotating ("1" means no rotation)...
             if [[ -n "$orientation" && "$orientation" != 1 ]]; then
                 ## ...auto-rotate the image according to the EXIF data.
-                convert -- "${FILE_PATH}" -auto-orient "${IMAGE_CACHE_PATH}" && exit 6
+                convert -- "${FILE_PATH}" -auto-orient -resize "${DEFAULT_SIZE}" "${IMAGE_CACHE_PATH}" && exit 6
             fi
 
             ## `w3mimgdisplay` will be called for all images (unless overridden
