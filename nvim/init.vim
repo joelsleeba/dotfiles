@@ -3,7 +3,7 @@ call plug#begin()
 " vimtex
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='sioyek'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
@@ -20,9 +20,16 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Code Completer.
 " Configured for C-type languages C#, Node.JS, TypeScript,
 " Python and Java. Support can be added for Golang and Rust.
-Plug 'ycm-core/YouCompleteMe'
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Code Formatter
+" Terminal Plugin
+Plug 'kassio/neoterm'
+let g:neoterm_default_mod='belowright' " open terminal in bottom split
+let g:neoterm_size=16 " terminal split size
+let g:neoterm_autoscroll=1 " scroll to the bottom when running a command
+
+" Code Formatter
 Plug 'sbdchd/neoformat'
 let UNCRUSTIFY_CONFIG="$HOME/.config/uncrustify/uncrustify.cfg"
 
@@ -31,19 +38,26 @@ Plug 'mboughaba/i3config.vim'
 
 " For the sidebar file explorer
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
-Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-tree.lua' 
 
-" gruvbox theme for nvim
-Plug 'morhetz/gruvbox'
-
+" gruvbox theme for nvim 
+Plug 'morhetz/gruvbox' 
 call plug#end()
-
-" Keymaps
-nnoremap <C-n> :NvimTreeToggle<CR>
 
 " for line numbers
 set number
 set foldmethod=indent
 colorscheme gruvbox
 :lua require'nvim-tree'.setup()
+
+" Keymaps
+nnoremap <C-n> :NvimTreeToggle<CR>
+nmap <silent> <S-k> :wincmd k<CR>
+nmap <silent> <S-j> :wincmd j<CR>
+nmap <silent> <S-h> :wincmd h<CR>
+nmap <silent> <S-l> :wincmd l<CR>
+nmap <silent> <S-Up> :wincmd k<CR>
+nmap <silent> <S-Down> :wincmd j<CR>
+nmap <silent> <S-Left> :wincmd h<CR>
+nmap <silent> <S-Right> :wincmd l<CR>
 
