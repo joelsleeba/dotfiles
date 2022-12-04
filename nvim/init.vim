@@ -13,7 +13,7 @@ Plug 'honza/vim-snippets'
 
 " snippets engine
 Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger="<return>"
+let g:UltiSnipsExpandTrigger="<Space>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
@@ -46,7 +46,7 @@ call plug#end()
 
 " for line numbers
 set number
-set foldmethod=indent
+"set foldmethod=indent
 colorscheme gruvbox
 :lua require'nvim-tree'.setup()
 
