@@ -162,7 +162,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Open particular applications in particular workspaces
 assign [class="firefox"] $ws2
-#assign [class="ranger"] $ws3
+assign [class="ranger"] $ws3
 assign [class="cmus"] $ws4
 assign [class="vlc"] $ws5
 assign [class="foliate"] $ws6
