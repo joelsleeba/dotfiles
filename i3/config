@@ -224,7 +224,7 @@ bindsym $mod+F2 exec firefox
 #bindsym $mod+F3 exec ranger
 bindsym $mod+F4 exec i3-msg 'workspace $ws4; exec kitty cmus'
 bindsym $mod+F5 exec vlc
-bindsym $mod+F6 exec foliate 
+bindsym $mod+F6 exec zathura 
 bindsym $mod+F7 exec sioyek
 
 

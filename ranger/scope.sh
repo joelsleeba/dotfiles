@@ -123,7 +123,7 @@ handle_image() {
     ## rendered from vector graphics. If the conversion program allows
     ## specifying only one dimension while keeping the aspect ratio, the width
     ## will be used.
-    local DEFAULT_SIZE="1920x1080"
+    local DEFAULT_SIZE="1280x720"
 
     local mimetype="${1}"
     case "${mimetype}" in
@@ -178,15 +178,19 @@ handle_image() {
                  && exit 6 || exit 1;;
 
 
-        ## ePub, MOBI, FB2 (using Calibre)
-        # application/epub+zip|application/x-mobipocket-ebook|\
-        # application/x-fictionbook+xml)
-        #     # ePub (using https://github.com/marianosimone/epub-thumbnailer)
-        #     epub-thumbnailer "${FILE_PATH}" "${IMAGE_CACHE_PATH}" \
-        #         "${DEFAULT_SIZE%x*}" && exit 6
+        # ePub, MOBI, FB2 (using Calibre)
+         application/epub+zip|application/x-mobipocket-ebook|\
+         application/x-fictionbook+xml)
+             # ePub (using https://github.com/marianosimone/epub-thumbnailer)
+             # epub-thumbnailer "${FILE_PATH}" "${IMAGE_CACHE_PATH}" \
+             #   "${DEFAULT_SIZE%x*}" && exit 6
+	     # Ok. I don't want to compile another programme from source and
+	     # therefore I'm gonna use gnome-epub-thumbnailer for this. Thanks
+             gnome-epub-thumbnailer -s "${DEFAULT_SIZE%x*}" "${FILE_PATH}" \
+		     "${IMAGE_CACHE_PATH}" && exit 6
         #     ebook-meta --get-cover="${IMAGE_CACHE_PATH}" -- "${FILE_PATH}" \
         #         >/dev/null && exit 6
-        #     exit 1;;
+             exit 1;;
 
         ## Font
         application/font*|application/*opentype)
