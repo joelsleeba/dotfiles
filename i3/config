@@ -131,7 +131,7 @@ set $ws4 "4:"
 set $ws5 "5:嗢"
 set $ws6 "6:"
 set $ws7 "7:"
-set $ws8 "8"
+set $ws8 "8:"
 set $ws9 "9"
 set $ws10 "10"
 
@@ -166,8 +166,9 @@ assign [class="ranger"] $ws3
 assign [class="cmus"] $ws4
 assign [class="vlc"] $ws5
 assign [class="foliate"] $ws6
-assign [title="zathura"] $ws6
-assign [class="sioyek"] $ws7
+assign [class="sioyek"] $ws6
+assign [title="zathura"] $ws7
+assign [class="obsidian"] $ws8
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -221,11 +222,12 @@ bindsym $mod+Ctrl+Shift+s+n exec --no-startup-id shutdown now
 # Application Shortcuts
 bindsym $mod+F1 exec kitty
 bindsym $mod+F2 exec firefox
-#bindsym $mod+F3 exec ranger
+bindsym $mod+F3 exec ranger
 bindsym $mod+F4 exec i3-msg 'workspace $ws4; exec kitty cmus'
 bindsym $mod+F5 exec vlc
-bindsym $mod+F6 exec zathura 
-bindsym $mod+F7 exec sioyek
+bindsym $mod+F6 exec foliate 
+bindsym $mod+F7 exec zathura 
+bindsym $mod+F8 exec obsidian 
 
 
 # Autostart Applications
@@ -233,3 +235,5 @@ bindsym $mod+F7 exec sioyek
 exec --no-startup-id i3-msg 'workspace $ws3; exec kitty ranger'
 exec --no-startup-id i3-msg 'workspace $ws1; exec kitty'
 #exec --no-startup-id i3-msg 'workspace $ws4; exec kitty cmus'
+exec --no-startup-id picom &
+exec --no-startup-id /usr/lib/kdeconnectd 
