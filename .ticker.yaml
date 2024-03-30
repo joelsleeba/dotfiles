@@ -1,0 +1,40 @@
+# ~/.ticker.yaml
+show-summary: true
+show-tags: true
+show-fundamentals: true
+show-separator: true
+show-holdings: true
+interval: 1
+currency: INR
+currency-summary-only: false
+watchlist:
+  - AXISBANK.NS
+  - ICICBANK.NS
+  - IRCTC.NS
+  - SBIN.NS
+  # - BTC-USD
+  # - SOL.X # Solana price via CoinGecko
+  # - SAMOYEDCOIN.CG # Samoyed price via CoinGecko
+lots:
+  - symbol: "ICICIBANK.NS"
+    quantity: 2
+    unit_cost: 958.60
+  - symbol: "IRCTC.NS"
+    quantity: 3.0
+    unit_cost: 606.25
+  - symbol: "SBIN.NS"
+    quantity: 3.0
+    unit_cost: 565.25
+  - symbol: AXISBANK.NS
+    quantity: 4.0
+    unit_cost: 978
+    # fixed_cost: 7.00 # e.g. brokerage commission fee
+groups:
+  - name: crypto
+    watchlist:
+      - SHIB-USD
+      - VGX-USD
+    holdings:
+      - symbol: SOL1-USD
+        quantity: 17
+        unit_cost: 159.10

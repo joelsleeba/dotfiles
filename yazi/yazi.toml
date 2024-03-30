@@ -1,0 +1,103 @@
+[manager]
+ratio = [ 1, 4, 3 ]
+sort_by        = "modified"
+sort_sensitive = false
+sort_reverse   = true
+sort_dir_first = true
+show_hidden    = false
+show_symlink   = true
+# linemode = "mtime"
+
+[preview]
+tab_size   = 2
+max_width  = 600
+max_height = 900
+cache_dir  = "~/.cache/yazi"
+
+[opener]
+folder = [
+	{ exec = 'open -R "$@"', desc = "Reveal in Finder" },
+	{ exec = '$EDITOR "$@"' },
+]
+archive = [
+	{ exec = 'unar "$1"', desc = "Extract here" },
+]
+text = [
+	{ exec = 'nvim "$@"', block = true },
+]
+image = [
+	{ exec = 'nsxiv "$@"', desc = "Open" },
+	{ exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+]
+raw-image = [
+	{ exec = 'imv "$@"', desc = "Open" },
+	{ exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+]
+video = [
+	{ exec = 'mpv "$@"' },
+	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+]
+audio = [
+  { exec = 'mpc status | grep -E "playing|paused" ||  mpc clear ; mpc add "$(echo "$@" | sed "s/.*Music\///")" && mpc play', desc = "Play in MPD" },
+	{ exec = 'mpv "$@"' },
+	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+]
+document = [
+  { exec = 'zathura "$@"', desc = "Zathura", orphan=true },
+  { exec = 'sioyek "$@"', desc = "Sioyek", orphan=true },
+]
+font = [
+  { exec = 'cp "$@" ~/.local/share/fonts/ && fc-cache -vf', desc = "install font" },
+]
+fallback = [
+	{ exec = 'open "$@"', desc = "Open" },
+	{ exec = 'open -R "$@"', desc = "Reveal in Finder" },
+]
+
+[open]
+rules = [
+	{ name = "*/", use = "folder" },
+	{ name = "*.dng", use = "raw-image" },
+	{ name = "*.epub", use = "document" },
+	{ name = "*.djvu", use = "document" },
+	{ name = "*.ps", use = "document" },
+
+	{ mime = "application/zip", use = "archive" },
+	{ mime = "application/gzip", use = "archive" },
+	{ mime = "application/x-tar", use = "archive" },
+	{ mime = "application/x-bzip", use = "archive" },
+	{ mime = "application/x-bzip2", use = "archive" },
+	{ mime = "application/x-7z-compressed", use = "archive" },
+	{ mime = "application/x-rar", use = "archive" },
+
+	{ mime = "application/json", use = "text" },
+	{ mime = "application/pdf", use = "document" },
+
+	{ mime = "*/javascript", use = "text" },
+	{ mime = "text/*", use = "text" },
+	{ mime = "image/*", use = "image" },
+	{ mime = "video/*", use = "video" },
+	{ mime = "audio/*", use = "audio" },
+	{ mime = "*font*", use = "font" },
+	{ mime = "inode/x-empty", use = "text" },
+
+	{ mime = "*", use = "fallback" },
+]
+
+[plugin]
+prepend_previewers = [
+  { name = "*.djvu", exec = "djvu" },
+  { name = "*.epub", exec = "epub" },
+  { name = "*.heic", exec = "heic" },
+  { mime = "audio/*", exec = "album_art" },
+  { mime = "*font*", exec = "fonts" },
+  { mime = "application/*opentype", exec = "fonts" },
+]
+
+[tasks]
+micro_workers = 5
+macro_workers = 10
+bizarre_retry = 5
+
+[log]
+enabled = true
