@@ -1,8 +1,10 @@
 # List of ticker symbols to start app with
 symbols:
-  - SPY
-  - AMD
-
+  - CESC.NS
+  - SAFARI.NS
+  - KITEX.NS
+  - NTPC.NS
+  - AXISBANK.BO
 # Chart type to start app with
 # Default is line
 # Possible values: line, candle, kagi

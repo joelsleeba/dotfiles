@@ -8,26 +8,51 @@ interval: 1
 currency: INR
 currency-summary-only: false
 watchlist:
-  - AXISBANK.NS
-  - ICICBANK.NS
+  - AXISBANK.BO
+  - CESC.NS
+  - COCHINSHIP.NS
+  - FACT.BO
+  - ICICIBANK.NS
+  - KITEX.NS
+  - NTPC.NS
+  - POWERGRID.BO
+  - SAFARI.NS
   - IRCTC.NS
-  - SBIN.NS
   # - BTC-USD
   # - SOL.X # Solana price via CoinGecko
   # - SAMOYEDCOIN.CG # Samoyed price via CoinGecko
 lots:
+  - symbol: AXISBANK.BO
+    quantity: 4.0
+    unit_cost: 978
+  - symbol: "CESC.NS"
+    quantity: 10.0
+    unit_cost: 93.07
+  - symbol: "COCHINSHIP.NS"
+    quantity: 5
+    unit_cost: 758.00
+  - symbol: "FACT.BO"
+    quantity: 4
+    unit_cost: 766.55
   - symbol: "ICICIBANK.NS"
     quantity: 2
     unit_cost: 958.60
   - symbol: "IRCTC.NS"
     quantity: 3.0
     unit_cost: 606.25
-  - symbol: "SBIN.NS"
-    quantity: 3.0
-    unit_cost: 565.25
-  - symbol: AXISBANK.NS
-    quantity: 4.0
-    unit_cost: 978
+  - symbol: "KITEX.NS"
+    quantity: 30
+    unit_cost: 191
+  - symbol: "NTPC.NS"
+    quantity: 4
+    unit_cost: 253.40
+  - symbol: "POWERGRID.BO"
+    quantity: 12
+    unit_cost: 227.85
+  - symbol: "SAFARI.NS"
+    quantity: 2
+    unit_cost: 1775.0
+
     # fixed_cost: 7.00 # e.g. brokerage commission fee
 groups:
   - name: crypto

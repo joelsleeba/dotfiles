@@ -2,7 +2,7 @@
 /*   -- */
 /* } */
 
-*{
+* {
   border: none;
   border-radius: 0;
   font-family: Arimo Nerd Font;
@@ -11,13 +11,13 @@
 }
 
 @keyframes error-blink {
-    to {
-        background: @theme_bg_color;
-        color: @error_bg_color;
-    }
+  to {
+    background: @theme_bg_color;
+    color: @error_bg_color;
+  }
 }
 
-window{
+window {
   /* background: @theme_base_color; */
   background: transparent;
   /* padding: 5px 10px; */
@@ -44,101 +44,143 @@ window#waybar {
 /* use this for without gradient borders*/
 .modules-left,
 .modules-center,
-.modules-right{
+.modules-right {
   color: @accent_color;
-  margin: 5px 0px;
+  margin: 0px 0px 5px 0px;
 }
 
 /* Independent standalone modules */
-#image, #workspaces, #window, #submap, #mpd, #mpris, #clock{ 
+#image,
+#workspaces,
+#window,
+#submap,
+#mpd,
+#mpris,
+#clock {
   border-radius: 5px;
   border: 1px solid @borders;
   padding: 0px 10px;
   background: @theme_base_color;
+  /* opacity: 0.7; */
+  /* filter: blur(5px); */
   /* background: rgb(0,11,255); */
-  /* background: linear-gradient(90deg, rgba(0,11,255,1) 0%, rgba(156,0,127,1) 51%, rgba(255,0,33,1) 100%); */
+  /* background: linear-gradient( */
+  /*   90deg, */
+  /*   rgba(0, 11, 255, 1) 0%, */
+  /*   rgba(156, 0, 127, 1) 51%, */
+  /*   rgba(255, 0, 33, 1) 100% */
+  /* ); */
 }
 
 /* Independent standalone modules to the left */
-#image, #workspaces, #window, #submap, #mpd, #mpris{
-  margin-left: 5px;
+#image,
+#workspaces,
+#window,
+#submap,
+#mpd,
+#mpris {
+  margin-left: 6px;
 }
 
-#workspaces{
+#workspaces {
   padding: 0px; /* Since buttons will take care of padding */
   /* box-shadow: 0px 0px 2px 0px @theme_fg_color; */
+  margin-left: 22px;
 }
 
 #workspaces button {
-  padding: 0px 8px;
-  min-width:20px;
+  padding: 0px 6px;
+  min-width: 20px;
   box-shadow: none;
 }
 
 /* for Sway */
 #workspaces button.focused {
-  color: @theme_selected_fg_color;
-  background-color: @theme_selected_bg_color;
+  /* color: @theme_selected_fg_color; */
+  /* background-color: @theme_selected_bg_color; */
+  color: @theme_selected_bg_color;
   border-radius: 5px;
 }
 
 /* for Hyprland */
 #workspaces button.active {
-  color: @theme_selected_fg_color;
-  background-color: @theme_selected_bg_color;
+  /* changed when removed the icons for dots */
+  /* color: @theme_selected_fg_color; */
+  /* background-color: @theme_selected_bg_color; */
+  color: @error_color;
   border-radius: 5px;
 }
 
-#workspaces button.active:hover{
-	background-color: @theme_selected_bg_color;
-	color: @theme_selected_fg_color;
-	border-radius: 5px;
+#workspaces button.active:hover {
+  /* changed when removed the icons for dots */
+  /* background-color: @theme_selected_bg_color; */
+  /* color: @theme_selected_fg_color; */
+  border-radius: 5px;
 }
 
 #workspaces button:hover button:not(.focused) {
-	background-color: @insensitive_bg_color;
-	color: @theme_unfocused_text_color;
-	border-radius: 5px;
+  background-color: @insensitive_bg_color;
+  color: @theme_unfocused_text_color;
+  border-radius: 5px;
 }
 
 #workspaces .persistent {
-  color: @insensitive_fg_color;
+  color: @unfocused_insensitive_color;
 }
 
-#window{
+#window {
   background-color: transparent;
   color: @theme_selected_fg_color;
 }
 
-#window.empty{
-  padding:0;
-  margin:0;
+#window.empty {
+  padding: 0;
+  margin: 0;
 }
 
-#mpris.stopped{
+#mpris.stopped {
   padding: 0px;
   margin: 0px;
   background-color: transparent;
 }
 
-#tray, #custom-dnd, #privacy, #idle_inhibitor, #network, #bluetooth, #pulseaudio, #pulseaudio-slider, #cpu, #temperature, #memory, #battery{
-	background-color: @theme_base_color;
-	padding: 5px 6px;
+#tray,
+#custom-dnd,
+#privacy,
+#idle_inhibitor,
+#network,
+#bluetooth,
+#pulseaudio,
+#pulseaudio-slider,
+#cpu,
+#temperature,
+#memory,
+#battery {
+  background-color: @theme_base_color;
+  padding: 5px 6px;
   border-top: 1px solid @borders;
   border-bottom: 1px solid @borders;
 }
 
 /* Terminal modules of independent islands in left*/
-#tray, #idle_inhibitor, #battery{
-  margin-right: 5px;
+#tray,
+#idle_inhibitor,
+#battery {
+  margin-right: 6px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-right: 1px solid @borders;
   padding-right: 12px;
 }
 
+#battery {
+  margin-right: 22px;
+}
+
 /* Initial modules of independent island in left */
-#tray, #custom-dnd, #network{
+#tray,
+#custom-dnd,
+#network {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border-left: 1px solid @borders;
@@ -175,7 +217,7 @@ window#waybar {
 /*     border: 1px solid @borders */
 /* } */
 
-#cpu{
+#cpu {
   min-width: 4em;
 }
 
@@ -189,7 +231,7 @@ window#waybar {
   animation-name: error-blink;
   animation-duration: 833ms;
   animation-timing-function: ease-in;
-  animation-iteration-count:infinite;
+  animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
@@ -209,11 +251,11 @@ window#waybar {
   animation-name: error-blink;
   animation-duration: 833ms;
   animation-timing-function: ease-in;
-  animation-iteration-count:infinite;
+  animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
-#battery{
+#battery {
   color: @success_color;
 }
 
@@ -223,11 +265,11 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-  background-color: @warning_bg_color ;
-  color: @warning_fg_color ;
+  background-color: @warning_bg_color;
+  color: @warning_fg_color;
 }
 
-#battery.critical:not(.charging){
+#battery.critical:not(.charging) {
   background-color: @error_bg_color;
   color: @error_fg_color;
   /* High cpu usage with animations */
@@ -238,13 +280,13 @@ window#waybar {
   /* animation-direction: alternate; */
 }
 
-#battery.full{
+#battery.full {
   background-color: @success_bg_color;
   color: @success_fg_color;
   animation-name: error-blink;
   animation-duration: 833ms;
   animation-timing-function: ease-in;
-  animation-iteration-count:infinite;
+  animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 /* #custom-date { */
@@ -280,7 +322,6 @@ window#waybar {
 /* #clock.months{ */
 /*   color: @success_bg_color; */
 /* } */
-
 
 tooltip {
   padding: 10px;

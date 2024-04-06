@@ -12,6 +12,11 @@ return {
     window = {
       mappings = {
         ["<space>"] = "none",
+        ["h"] = "close_node",
+        ["l"] = "open",
+        ["L"] = "focus_preview",
+        ["C"] = "set_root",
+        ["."] = "toggle_hidden",
       },
     },
     default_component_configs = {

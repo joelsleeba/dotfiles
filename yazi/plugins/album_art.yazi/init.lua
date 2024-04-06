@@ -24,6 +24,7 @@ function M:preload()
 	local output = Command("exiftool")
 		:args({
 			"-b",
+			"-Coverart",
 			"-Picture",
 			tostring(self.file.url),
 		})

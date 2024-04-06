@@ -103,7 +103,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 elif [[ "$USER"="root" ]]; then
   export EDITOR='vim'
 else
-  export EDITOR=nvim
+  export EDITOR='nvim'
 fi
 
 
@@ -233,9 +233,9 @@ alias /R='python ~/.config/userscripts/radio-fzf.py'
 TRAPUSR1() {
   scheme=$(cat /tmp/color_scheme)
   if [[ "$scheme" == "day" ]];then
-    theme.sh tokyo-day
+    theme.sh gruvbox
   elif [[ "$scheme" == "night" ]]; then
-    theme.sh tokyo-night
+    theme.sh gruvbox-dark-hard
   fi
 }
 

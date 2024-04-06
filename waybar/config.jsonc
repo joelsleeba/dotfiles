@@ -1,8 +1,10 @@
 {
   "position": "bottom",
   "interval": 1,
-  "height": 40,
+  "height": 20,
   "layer": "top",
+  // "mode" : "hide",
+  // "start_hidden" : true,
   "modules-left": ["hyprland/workspaces", "hyprland/submap", "mpris"],
   "modules-center": ["clock"],
   "modules-right": ["tray", "custom/dnd", "privacy", "idle_inhibitor", "network", "bluetooth", "pulseaudio", "cpu", "temperature", "memory", "battery"],
@@ -32,16 +34,26 @@
 	  "all-outputs": false,
 	  "format": "{icon}",
     "format-icons": {
-      "1": "",
-     	"2": "󰖟",
-      "3": "",
-     	"4": "󰧮",
-     	"5": "",
-     	"6": "󰕼",
-     	"7": "󰝚",
-     	"8": "",
-     	"9": "",
-     	"10": "󰖲",
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "",
+      // "1": "",
+      // "2": "󰖟",
+      // "3": "",
+      // "4": "󰧮",
+      // "5": "",
+      // "6": "󰕼",
+      // "7": "󰝚",
+      // "8": "",
+      // "9": "",
+      // "10": "󰖲",
     }
   },
 
@@ -136,8 +148,8 @@
         "months":     "<b>{}</b>",
         "days":       "<span><b>{}</b></span>",
         "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-        "weekdays":   "<span color='#ff6699'><b>{}</b></span>",
-        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        "weekdays":   "<span color='#f28b82'><b>{}</b></span>",
+        "today":      "<span color='#f28b82'><b><u>{}</u></b></span>"
       }
     },
     "actions":  {
@@ -151,7 +163,7 @@
 	},
 
   "tray" : {
-    "icon-size" : 18,
+    "icon-size" : 15,
     "show-passive-items" : true,
     "spacing" : 10,
   },
@@ -172,11 +184,6 @@
 	  "modules": [
 	  	{
 	  		"type": "screenshare",
-	  		"tooltip": true,
-	  		"tooltip-icon-size": 24
-	  	},
-	  	{
-	  		"type": "audio-out",
 	  		"tooltip": true,
 	  		"tooltip-icon-size": 24
 	  	},

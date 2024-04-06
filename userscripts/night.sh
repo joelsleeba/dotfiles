@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 # GTK
-export GTK_THEME='Tokyonight-Dark'
+export GTK_THEME='Gruvbox-Dark'
 THEME_DIR="$HOME/.local/share/themes/"
 
 # GTK2
@@ -22,7 +22,7 @@ echo "night" >/tmp/color_scheme
 
 # Terminal and Shell
 # theme.sh tokyo-night
-ln -f -s /usr/share/foot/themes/tokyonight-night ~/.config/foot/color
+ln -f -s /usr/share/foot/themes/gruvbox-dark ~/.config/foot/color
 pkill -USR1 zsh
 
 # Wallpaper
@@ -34,4 +34,4 @@ makoctl reload
 
 # set wallpaper at last since it doesn't daemonize
 killall swaybg
-swaybg -m fill -i $HOME/.config/userscripts/walls/kurzgesagt/night.jpg
+swaybg -m fill -i $HOME/.config/userscripts/walls/gruvbox/dark-samurai.jpg

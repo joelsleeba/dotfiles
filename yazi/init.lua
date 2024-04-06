@@ -1,26 +1,15 @@
+-- For full borders
 function Manager:render(area)
-	self.area = area
-
-	local chunks = ui.Layout()
-		:direction(ui.Layout.HORIZONTAL)
-		:constraints({
-			ui.Constraint.Ratio(MANAGER.ratio.parent, MANAGER.ratio.all),
-			ui.Constraint.Ratio(MANAGER.ratio.current, MANAGER.ratio.all),
-			ui.Constraint.Ratio(MANAGER.ratio.preview, MANAGER.ratio.all),
-		})
-		:split(area)
+	local chunks = self:layout(area)
 
 	local bar = function(c, x, y)
-		return ui.Bar(
-			ui.Rect({ x = math.max(0, x), y = math.max(0, y), w = math.min(1, area.w), h = math.min(1, area.h) }),
-			ui.Bar.TOP
-		):symbol(c)
+		x, y = math.max(0, x), math.max(0, y)
+		return ui.Bar(ui.Rect({ x = x, y = y, w = ya.clamp(0, area.w - x, 1), h = math.min(1, area.h) }), ui.Bar.TOP)
+			:symbol(c)
 	end
 
 	return ya.flat({
 		-- Borders
-		-- ui.Bar(chunks[1], ui.Bar.RIGHT):symbol(THEME.manager.border_symbol):style(THEME.manager.border_style),
-		-- ui.Bar(chunks[3], ui.Bar.LEFT):symbol(THEME.manager.border_symbol):style(THEME.manager.border_style),
 		ui.Border(area, ui.Border.ALL):type(ui.Border.ROUNDED),
 		ui.Bar(chunks[1], ui.Bar.RIGHT),
 		ui.Bar(chunks[3], ui.Bar.LEFT),
@@ -39,6 +28,21 @@ function Manager:render(area)
 	})
 end
 
+-- For getting the symlink info on the statusbar
+function Status:name()
+	local h = cx.active.current.hovered
+	if not h then
+		return ui.Span("")
+	end
+
+	local linked = ""
+	if h.link_to ~= nil then
+		linked = " -> " .. tostring(h.link_to)
+	end
+	return ui.Span(" " .. h.name .. linked)
+end
+
+-- For owner:group information in status bar
 function Status:owner()
 	local h = cx.active.current.hovered
 	if h == nil or ya.target_family() ~= "unix" then
