@@ -3,11 +3,11 @@
 import csv
 import subprocess as sp
 import psutil
+import colorama as c
 from jinja2 import Template
-from colorama import init, Fore, Style
 
 # Initialize colorama
-init()
+c.init()
 
 
 def read_csv(file_path):
@@ -30,17 +30,19 @@ def fzf_station_select(file_path):
     data = read_csv(file_path)
 
     # Add color. This is currently not working with piping to fzf
-    # template_str = "{% for entry in data %}{{ c['Fore'].MAGENTA }}{% if entry['station']|length > 40 %}{{ entry['station'][:37] + '...' }}{% else %}{{ entry['station'].ljust(40) }}{% endif %}{{ c['Style'].RESET_ALL }} :: {{ c['Fore'].CYAN }}{% if entry['radio']|length > 12 %}{{ entry['radio'][:9] + '...' }}{% else %}{{ entry['radio'].ljust(12) }}{% endif %}{{ c['Style'].RESET_ALL }} :: {{ c['Fore'].YELLOW }}{{ entry['link'] }}{{ c['Style'].RESET_ALL }}\n{% endfor %}"
+    template_str = "{% for entry in data %}{{ c.Fore.MAGENTA }}{% if entry['station']|length > 40 %}{{ entry['station'][:37] + '...' }}{% else %}{{ entry['station'].ljust(40) }}{% endif %}{{ c.Style.RESET_ALL }} :: {{ c.Fore.CYAN }}{% if entry['radio']|length > 12 %}{{ entry['radio'][:9] + '...' }}{% else %}{{ entry['radio'].ljust(12) }}{% endif %}{{ c.Style.RESET_ALL }} :: {{ c.Fore.YELLOW }}{{ entry['link'] }}{{ c.Style.RESET_ALL }}\n{% endfor %}"
     # template = Template(template_str)
     # output = template.render(data=data, c={'Fore': Fore, 'Style': Fore})  # Render the output
 
-    template_str = "{% for entry in data %}{% if entry['station']|length > 40 %}{{ entry['station'][:37] + '...' }}{% else %}{{ entry['station'].ljust(40) }}{% endif %} :: {% if entry['radio']|length > 12 %}{{ entry['radio'][:9] + '...' }}{% else %}{{ entry['radio'].ljust(12) }}{% endif %} :: {{ entry['link'] }}\n{% endfor %}"
+    # template_str = "{% for entry in data %}{% if entry['station']|length > 40 %}{{ entry['station'][:37] + '...' }}{% else %}{{ entry['station'].ljust(40) }}{% endif %} :: {% if entry['radio']|length > 12 %}{{ entry['radio'][:9] + '...' }}{% else %}{{ entry['radio'].ljust(12) }}{% endif %} :: {{ entry['link'] }}\n{% endfor %}"
     template = Template(template_str)
-    output = template.render(data=data, c={'Fore': Fore})  # Render the output
+    # output = template.render(data=data, c={'Fore': Fore})  # Render the output
+    output = template.render(data=data, c=c)  # Render the output
 
     cmd_out = sp.Popen(["echo", output], stdout=sp.PIPE, text=True)
+    fzf_command = ["fzf", "--ansi", "-i"]
     try:
-        result = sp.Popen(["fzf"], stdin=cmd_out.stdout,
+        result = sp.Popen(fzf_command, stdin=cmd_out.stdout,
                           stdout=sp.PIPE, text=True)
         selected_entry, _ = result.communicate()
         return selected_entry.split(' ')[-1].strip()

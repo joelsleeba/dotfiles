@@ -84,8 +84,8 @@ keymap = [
 	{ on = [ "<C-s>" ],     run = "search none",                desc = "Cancel the ongoing search" },
 	{ on = [ "f" ],         run = "jump zoxide",                desc = "Jump to a directory using zoxide" },
 	{ on = [ "F" ],         run = "jump fzf",                   desc = "Jump to a directory, or reveal a file using fzf" },
-	{ on = [ "U", "n" ],    exec = "shell --confirm 'curl -F file=@'$@' 0x1.st | wl-copy'",                  desc = "Upload file to 0x0.st" },
-	{ on = [ "U", "s" ],    exec = "shell --confirm 'curl -F file=@'$@' -Fsecret= https://0x0.st | wl-copy'", desc = "Upload file secretly to 0x0.st" },
+	{ on = [ "U", "n" ],    run = "shell --confirm 'curl -F file=@'$@' 0x1.st | wl-copy'",                  desc = "Upload file to 0x0.st" },
+	{ on = [ "U", "s" ],    run = "shell --confirm 'curl -F file=@'$@' -Fsecret= https://0x0.st | wl-copy'", desc = "Upload file secretly to 0x0.st" },
 
 	# Linemode
 	# { on = [ "m", "s" ], run = "linemode size",        desc = "Set linemode to size" },
@@ -103,8 +103,8 @@ keymap = [
 	{ on = [ "f" ], run = "filter --smart", desc = "Filter the files" },
 
 	# Find
-	{ on = [ "/" ], run = "find --smart",            desc = "Find next file" },
-	{ on = [ "?" ], run = "find --previous --smart", desc = "Find previous file" },
+	{ on = [ "/" ], run = "find --smart",            desc = "Find file" },
+	{ on = [ "?" ], run = "filter --smart", desc = "Filter file" },
 	{ on = [ "n" ], run = "find_arrow",              desc = "Go to next found file" },
 	{ on = [ "N" ], run = "find_arrow --previous",   desc = "Go to previous found file" },
 
@@ -149,11 +149,11 @@ keymap = [
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
 	{ on = [ "g", "t" ],       run = "cd /tmp",          desc = "Go to the temporary directory" },
-	{ on = [ "g", "m" ],       exec = "cd ~/Books/Mathematics/",          desc = "Go to the mathematics directory" },
-	{ on = [ "g", "M" ],       exec = "cd ~/Music/",          desc = "Go to the music directory" },
-	{ on = [ "g", "o" ],       exec = 'cd "~/Books/Mathematics/Operator Algebra/"',          desc = "Go to the operator algebra directory" },
-	{ on = [ "g", "l" ],       exec = 'cd "~/workspace/NotesHome/LogSeq/"',          desc = "Go to the logseq directory" },
-	{ on = [ "g", "n" ],       exec = 'cd "~/workspace/NotesHome/"',          desc = "Go to the NotesHome directory" },
+	{ on = [ "g", "m" ],       run = "cd ~/Books/Mathematics/",          desc = "Go to the mathematics directory" },
+	{ on = [ "g", "M" ],       run = "cd ~/Music/",          desc = "Go to the music directory" },
+	{ on = [ "g", "o" ],       run = 'cd "~/Books/Mathematics/Operator Algebra/"',          desc = "Go to the operator algebra directory" },
+	{ on = [ "g", "l" ],       run = 'cd "~/workspace/NotesHome/LogSeq/"',          desc = "Go to the logseq directory" },
+	{ on = [ "g", "n" ],       run = 'cd "~/workspace/NotesHome/"',          desc = "Go to the NotesHome directory" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
 	# Help

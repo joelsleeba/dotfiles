@@ -32,6 +32,12 @@ pkill -USR1 zsh
 ln -f -s $HOME/.config/mako/tokyo-day.conf $HOME/.config/mako/config
 makoctl reload
 
+# Rofi
+ln -f -s $HOME/.config/rofi/themes/gruvbox-light-hard.rasi $HOME/.config/rofi/colorscheme.rasi
+
+# zathura
+ln -f -s $HOME/.config/zathura/zathurarc-light $HOME/.config/zathura/zathurarc
+
 # set wallpaper at last. It doesn't daemonize
 killall swaybg
 swaybg -m fill -i $HOME/.config/userscripts/walls/gruvbox/light-Kojiro.png

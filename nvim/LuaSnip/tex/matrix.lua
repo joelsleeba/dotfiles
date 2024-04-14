@@ -100,4 +100,15 @@ return {
       ),
     })
   ),
+
+  -- Define smallmatrix snippet for inline matrices
+  s(
+    { trig = "smatrix", desc = "inline 2x2 small matrix" },
+    fmta(
+      [[
+        \big(\begin{smallmatrix} <> & <> \\ <> & <> \end{smallmatrix} \big)
+      ]],
+      { i(1, "a"), i(2, "b"), i(3, "c"), i(4, "d") }
+    )
+  ),
 }

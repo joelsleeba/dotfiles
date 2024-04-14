@@ -78,11 +78,19 @@ return {
         fmta(
           [[
           -- Define <> snippet <>
-          s({ trig = "<>", desc = "<>"},
+          s({ trig = "<>", desc = "<>", regTrig = <>, wordTrig = <> },
             <>
           ),
           ]],
-          { i(1), i(2), i(3), i(4), i(5) }
+          {
+            i(1, "snip"),
+            i(2, "that does snip job"),
+            i(3, "trigger"),
+            i(4, "description"),
+            i(5, "false"),
+            i(6, "true"),
+            i(7),
+          }
         )
       ),
       sn(nil, {

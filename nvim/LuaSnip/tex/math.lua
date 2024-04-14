@@ -48,15 +48,33 @@ return {
     }, { delimiters = "<>" })
   ),
 
-  -- Define fr snippet which expands to a fraction
+  -- Define a snippet which expands to a fraction
   s(
-    { trig = "([^%a])fr", desc = "fraction", regTrig = true, wordTrig = false },
+    { trig = "(%s)(%g+)/(%g+)", desc = "fraction", regTrig = true, wordTrig = false },
     fmt([[<>\frac{<>}{<>}]], {
       f(function(_, snip)
         return snip.captures[1]
       end),
-      d(1, get_visual),
-      i(2),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+      f(function(_, snip)
+        return snip.captures[3]
+      end),
+    }, { delimiters = "<>" })
+  ),
+
+  -- An alternative snippet for fractions when the denominator is yet to be filled. Later with knowledge combine this with the above snippet using subsnippets
+  s(
+    { trig = "(%s)(%g+)/", desc = "fraction", regTrig = true, wordTrig = false },
+    fmt([[<>\frac{<>}{<>}]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+      i(1),
     }, { delimiters = "<>" })
   ),
 
@@ -87,8 +105,8 @@ return {
   s(
     { trig = "set", dscr = "set braces", priority = 1000 },
     c(1, {
-      sn(nil, { t("\\{ "), i(1), t("  |  "), i(2), t(" \\}") }),
       sn(nil, { t("\\{ "), i(1), t(" \\}") }),
+      sn(nil, { t("\\{ "), i(1), t("  \\ : \\  "), i(2), t(" \\}") }),
     })
   ),
 
@@ -100,6 +118,28 @@ return {
           \sum_{<>}^{<>} <>
         ]],
       { i(1, "i"), i(2, "n"), i(3, "f(n)") }
+    )
+  ),
+
+  -- Define trace snippet which expands to a trace
+  s(
+    { trig = "trace", desc = "trace" },
+    fmta(
+      [[
+        \rm{trace}(<>)
+      ]],
+      { i(1) }
+    )
+  ),
+
+  -- Define norm snippet which expands to the norm expression
+  s(
+    { trig = "norm", desc = "norm", regTrig = false, wordTrig = true },
+    fmta(
+      [[
+        \|<>\|
+      ]],
+      { i(1) }
     )
   ),
 }

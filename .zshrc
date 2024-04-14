@@ -125,7 +125,7 @@ alias conf="cd ~/.config/"
 alias dotfiles="cd ~/workspace/dotfiles/"
 alias vim=nvim
 alias hx=helix
-alias mime="exiftool -S -MIMEType"
+alias mime="file -bL --mime-type"
 alias tb="nc termbin.com 9999"
 alias 0x0="curl -F 'file=@-' 0x0.st | wl-copy"
 alias 0x0st="curl -F 'file=@-' -Fsecret= https://0x0.st | wl-copy"
@@ -169,8 +169,13 @@ fi
 if command -v mpc > /dev/null; then
   fzf_mpc_play() {
     mpc status| grep -q -E "playing|paused" || mpc clear # clear the queue if not currently playing or has an active queue
-    file="$(FZF_DEFAULT_COMMAND='fd -i -t file --base-directory /home/joel/Music/' fzf -m)"
-    [[ -n "$file" ]] && (mpc add "$file" && mpc play)
+    files=("${(@f)$(FZF_DEFAULT_COMMAND='fd -i -t file --base-directory /home/joel/Music/' fzf -m)}")
+    [[ -n "$files" ]] || return 1
+    for file in $files
+    do
+      mpc add $file
+    done
+    mpc play
   }
 
   alias /m=fzf_mpc_play
@@ -200,11 +205,11 @@ fi
 if command -v nvim> /dev/null; then
   search_text_file() {
     filesearch="$(rg --color=always --line-number --no-heading --smart-case "${*:-}" |
-    fzf --ansi \
+    fzf --ansi -i\
         --color "hl:-1:underline,hl+:-1:underline:reverse" \
         --delimiter : \
-        --preview 'bat --color=always {1} --highlight-line {2}' \
-        --preview-window 'up,50%,border-bottom,+{2}+3/3,~3')"
+        --preview 'bat --color=always {1} --highlight-line {2} --style=changes,numbers,snip' \
+        --preview-window 'right,50%,border-rounded,+{2}+3/3,~3')"
     file="$(echo "$filesearch"|cut -d':' -f1)"
     line="$(echo "$filesearch"|cut -d':' -f2)"
     [[ -n "$file" ]] && (nvim "$(pwd)/$file" "+$line")
@@ -242,7 +247,7 @@ TRAPUSR1() {
 TRAPUSR1
 
 # Vim keybindings
-# bindkey -v
+bindkey -v
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -30,6 +30,7 @@ set searchurls.man https://man.archlinux.org/search?q=%s
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js
 set searchurls.mstack https://math.stackexchange.com/search?q=%s
 set searchurls.oeis https://oeis.org/search?q=%s
+set searchurls.pdf javascript:void(document.getElementById('viewer').style.filter = 'invert(100%) hue-rotate(180deg)')
 set searchurls.pydoc https://docs.python.org/3/search.html?q=%s
 set searchurls.r https://www.reddit.com/search/?q=%s
 set searchurls.r/ https://reddit.com/r/%s

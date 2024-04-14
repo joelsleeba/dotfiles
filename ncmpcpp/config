@@ -177,14 +177,14 @@ message_delay_time = 2
 ## scheme is described below in section about color definitions), it can be done
 ## with the syntax $(COLOR), e.g. to set the artist tag to one of the
 ## non-standard colors and make it have yellow background, you need to write
-## $(197_yellow)%a$(end). Note that for standard colors this is interchangable
+## $(197_yellow)%a$(end). Note that for standard colors this is interchangeable
 ## with attributes listed above.
 ##
 ## Note: colors can be nested.
 ##
 #
 #song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
-song_status_format = {$b$5%t$9$/b by $b$3%a$9$/b}
+song_status_format = {$b$2%t$9$/b by $b$4%a$9$/b}
 #
 #song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
 #
@@ -193,13 +193,13 @@ song_status_format = {$b$5%t$9$/b by $b$3%a$9$/b}
 #alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
 alternative_header_first_line_format = {{$5$b%t$/b$9}}
 #
-alternative_header_second_line_format = {{$3$b%a$/b$9}{ - $8$b%b$9}}|{%D}
+alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $8$b%b$9}}|{%D}
 #
-current_item_prefix = $(blue)$r
+current_item_prefix = $(yellow)$r
 #
 current_item_suffix = $/r$(end)
 #
-current_item_inactive_column_prefix = $(green)$r
+current_item_inactive_column_prefix = $(default)$r
 #
 current_item_inactive_column_suffix = $/r$(end)
 #
@@ -266,7 +266,7 @@ browser_playlist_prefix = "$5playlist$9 "
 ##
 #
 #song_columns_list_format = (30)[blue]{t|f:Title} (30)[green]{a} (30)[white]{b} (20)[cyan]{l}
-song_columns_list_format = (50)[green]{ar} (50)[blue]{t}
+song_columns_list_format = (50)[yellow]{ar} (50)[blue]{t}
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 #
 ##### various settings #####
@@ -517,11 +517,11 @@ use_console_editor = yes
 #
 colors_enabled = yes
 #
-empty_tag_color = green
+empty_tag_color = yellow
 #
 header_window_color = blue
 #
-volume_color = cyan:b
+volume_color = blue:b
 #
 state_line_color = white
 #
@@ -531,20 +531,20 @@ main_window_color = white
 #
 color1 = blue
 #
-color2 = green
+color2 = yellow
 #
 #progressbar_color = white:b
 #
-progressbar_elapsed_color = cyan:b
+progressbar_elapsed_color = blue:b
 #
 #statusbar_color = red
 #
-statusbar_time_color = cyan:b
+statusbar_time_color = blue:b
 #
 player_state_color = white:b
 #
 alternative_ui_separator_color = green:b
 #
-window_border_color = green
+window_border_color = yellow
 #
 active_window_border = blue

@@ -150,9 +150,106 @@ return {
     end, {})
   ),
 
-  -- Define template snippet for latex templates
-  s({ trig = "template", desc = "latex template" }, {
+  -- Define article snippet for latex templates
+  s({ trig = "article", desc = "latex template" }, {
     c(1, {
+      sn(
+        nil,
+        fmta(
+          [[
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage{url,hyperref}
+
+\usepackage{amsmath} % math symbols, matrices, cases, trig functions, var-greek symbols.
+\usepackage{amsfonts} % mathbb, mathfrak, large sum and product symbols.
+\usepackage{amssymb} % extended list of math symbols from AMS. https://ctan.math.washington.edu/tex-archive/fonts/amsfonts/doc/amssymb.pdf
+\usepackage{amsthm} % theorem styling.
+\usepackage{mathrsfs} % mathscr fonts.
+\usepackage{yhmath} % widehat.
+\usepackage{empheq} % emphasize equations, extending 'amsmath' and 'mathtools'.
+\usepackage{bm} % simplified bold math. Do \bm{math-equations-here}
+
+\geometry{
+  a4paper, % 'a4paper', 'c5paper', 'letterpaper', 'legalpaper'
+  asymmetric, % don't swap margins in left and right pages. as opposed to 'twoside'
+  centering, % to center the content between margins
+  bindingoffset=0cm,
+}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor = {red!60!black},
+  anchorcolor = red,
+  citecolor = {green!50!black},
+  urlcolor = magenta,
+  }
+
+\theoremstyle{plain} % default; italic text, extra space above and below
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{definition} % upright text, extra space above and below
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark} % upright text, no extra space above or below
+\newtheorem{remark}{Remark}[section]
+\newtheorem*{note}{Note} %'Notes' in italics and without counter 
+
+\newcommand{\propositionautorefname}{Proposition}
+\newcommand{\definitionautorefname}{Definition}
+\newcommand{\lemmaautorefname}{Lemma}
+\newcommand{\remarkautorefname}{Remark}
+\newcommand{\exampleautorefname}{Example}
+
+\addbibresource{<>.bib}
+
+
+\begin{document}
+
+\title{<>}
+
+\author{
+<> \\
+<> \\
+<> \\
+\and
+Author 2 \\
+This University, Country \\
+author@emaildomain.com \\
+}
+
+\maketitle
+
+\begin{abstract}
+<>
+\end{abstract}
+
+
+
+\printbibliography[heading=bibintoc]
+\end{document}
+          ]],
+          {
+            i(1, "articles"),
+            i(2, "Document Title"),
+            i(3, "Joel Sleeba"),
+            i(4, "University of Houston"),
+            i(5, "XXXXX@gmail.com"),
+            i(6),
+          }
+        )
+      ),
+    }),
+
+    c(2, {
       sn(
         nil,
         fmta(

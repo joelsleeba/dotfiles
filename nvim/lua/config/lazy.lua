@@ -16,6 +16,7 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
     { import = "plugins" },
+    { import = "plugins/languages" },
   },
   ui = {
     -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
