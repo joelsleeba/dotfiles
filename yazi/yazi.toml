@@ -26,8 +26,8 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 folder = [
+	{ run = 'nvim "$@"', block = true, desc = "nvim" },
 	{ run = 'open -R "$@"', desc = "Reveal in Finder" },
-	{ run = '$EDITOR "$@"' },
 ]
 archive = [
 	{ run = 'unar "$1"', desc = "Extract here" },
@@ -36,7 +36,7 @@ text = [
 	{ run = 'nvim "$@"', block = true },
 ]
 image = [
-	{ run = 'nsxiv "$@"', desc = "Open" },
+	{ run = 'imv "$@"', desc = "Open" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 raw-image = [

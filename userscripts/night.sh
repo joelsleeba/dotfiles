@@ -35,9 +35,14 @@ makoctl reload
 # Rofi
 ln -f -s $HOME/.config/rofi/themes/gruvbox-dark-hard.rasi $HOME/.config/rofi/colorscheme.rasi
 
-# zathura
+# zathura and sioyek
 ln -f -s $HOME/.config/zathura/zathurarc-dark $HOME/.config/zathura/zathurarc
+ln -f -s $HOME/.config/sioyek/prefs_user-dark.config $HOME/.config/sioyek/prefs_user.config
+
+# hyprlock
+ln -f -s $HOME/.config/hypr/hypr.d/hyprlock-dark.conf $HOME/.config/hypr/hyprlock.conf
 
 # set wallpaper at last since it doesn't daemonize
+ln -f -s $HOME/.config/userscripts/walls/gruvbox/dark-samurai.png $HOME/.config/userscripts/walls/wallpaper
 killall swaybg
-swaybg -m fill -i $HOME/.config/userscripts/walls/gruvbox/dark-samurai.jpg
+swaybg -m fill -i $HOME/.config/userscripts/walls/wallpaper

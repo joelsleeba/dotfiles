@@ -35,9 +35,14 @@ makoctl reload
 # Rofi
 ln -f -s $HOME/.config/rofi/themes/gruvbox-light-hard.rasi $HOME/.config/rofi/colorscheme.rasi
 
-# zathura
+# zathura and sioyek
 ln -f -s $HOME/.config/zathura/zathurarc-light $HOME/.config/zathura/zathurarc
+ln -f -s $HOME/.config/sioyek/prefs_user-light.config $HOME/.config/sioyek/prefs_user.config
+
+# hyprlock
+ln -f -s $HOME/.config/hypr/hypr.d/hyprlock-light.conf $HOME/.config/hypr/hyprlock.conf
 
 # set wallpaper at last. It doesn't daemonize
+ln -f -s $HOME/.config/userscripts/walls/gruvbox/light-Kojiro.png $HOME/.config/userscripts/walls/wallpaper
 killall swaybg
-swaybg -m fill -i $HOME/.config/userscripts/walls/gruvbox/light-Kojiro.png
+swaybg -m fill -i $HOME/.config/userscripts/walls/wallpaper

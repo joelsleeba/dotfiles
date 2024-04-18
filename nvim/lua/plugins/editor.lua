@@ -6,7 +6,7 @@ return {
       "kevinhwang91/promise-async",
       "nvim-treesitter/nvim-treesitter",
     },
-    enabled = true,
+    enabled = false, -- default vim options takes care of this now
     event = { "BufEnter", "BufLeave" },
     opts = {
       provider_selector = function(bufnr, filetype, buftype)

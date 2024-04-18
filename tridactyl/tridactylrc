@@ -35,6 +35,7 @@ set searchurls.pydoc https://docs.python.org/3/search.html?q=%s
 set searchurls.r https://www.reddit.com/search/?q=%s
 set searchurls.r/ https://reddit.com/r/%s
 set searchurls.rtt https://www.rottentomatoes.com/search?search=%s
+set searchurls.shub https://sci-hub.se/%s
 set searchurls.srx https://searx.thegpm.org/?q=%s
 set searchurls.spt https://open.spotify.com/search/%s
 set searchurls.stkofl https://stackoverflow.com/search?q=%s

@@ -100,7 +100,7 @@ eval "$(zoxide init --cmd j zsh)"
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
-elif [[ "$USER"="root" ]]; then
+elif [[ "$USER" = "root" ]]; then
   export EDITOR='vim'
 else
   export EDITOR='nvim'
@@ -169,7 +169,11 @@ fi
 if command -v mpc > /dev/null; then
   fzf_mpc_play() {
     mpc status| grep -q -E "playing|paused" || mpc clear # clear the queue if not currently playing or has an active queue
-    files=("${(@f)$(FZF_DEFAULT_COMMAND='fd -i -t file --base-directory /home/joel/Music/' fzf -m)}")
+    files=("${(@f)$(FZF_DEFAULT_COMMAND='fd -i -t file --base-directory /home/joel/Music/'\
+              fzf -m \
+              --preview 'exiftool -m -b -Coverart -Picture /home/joel/Music/{}|convert /dev/stdin -resize 320 /dev/stdout |chafa' \
+              --preview-window 'right,50%,border-rounded,+{2}+3/3,~3')}")
+    echo files
     [[ -n "$files" ]] || return 1
     for file in $files
     do

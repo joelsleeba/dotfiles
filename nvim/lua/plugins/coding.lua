@@ -32,7 +32,7 @@ return {
         latex = { "latexindent" },
         lua = { "stylua" },
         markdown = { "prettier" },
-        python = { "autopep8" },
+        python = { "black" },
         sh = { "shfmt" },
         tex = { "latexindent" },
         xml = { "xmlformat" },
@@ -176,7 +176,7 @@ return {
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
-      ensure_installed = {
+      ensure_installed = { -- For the love of god, don't add latex grammar until it can take care of concealing. Right now it breaks concealing.
         "bash",
         "c",
         "diff",

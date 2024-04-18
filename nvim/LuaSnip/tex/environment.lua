@@ -157,6 +157,7 @@ return {
         nil,
         fmta(
           [[
+% initial settings
 \documentclass[11pt]{article}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -174,6 +175,7 @@ return {
 \usepackage{empheq} % emphasize equations, extending 'amsmath' and 'mathtools'.
 \usepackage{bm} % simplified bold math. Do \bm{math-equations-here}
 
+% geometry of paper
 \geometry{
   a4paper, % 'a4paper', 'c5paper', 'letterpaper', 'legalpaper'
   asymmetric, % don't swap margins in left and right pages. as opposed to 'twoside'
@@ -181,6 +183,7 @@ return {
   bindingoffset=0cm,
 }
 
+% hyprlink settings
 \hypersetup{
   colorlinks = true,
   linkcolor = {red!60!black},
@@ -189,6 +192,7 @@ return {
   urlcolor = magenta,
   }
 
+% theorem styles
 \theoremstyle{plain} % default; italic text, extra space above and below
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}[section]
@@ -203,6 +207,7 @@ return {
 \newtheorem{remark}{Remark}[section]
 \newtheorem*{note}{Note} %'Notes' in italics and without counter 
 
+% renewcommands for counters
 \newcommand{\propositionautorefname}{Proposition}
 \newcommand{\definitionautorefname}{Definition}
 \newcommand{\lemmaautorefname}{Lemma}
@@ -216,6 +221,7 @@ return {
 
 \title{<>}
 
+% author list
 \author{
 <> \\
 <> \\
@@ -228,6 +234,7 @@ author@emaildomain.com \\
 
 \maketitle
 
+% abstract
 \begin{abstract}
 <>
 \end{abstract}
