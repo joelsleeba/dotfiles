@@ -21,28 +21,40 @@ function M:preload()
 		return 1
 	end
 
-	local output = Command("exiftool")
-		:args({
-			"-b",
-			"-Coverart",
-			"-Picture",
-			tostring(self.file.url),
-		})
-		:stdout(Command.PIPED)
-		:stderr(Command.PIPED)
-		:output()
+	local function get_extension(filename)
+		return filename:match("^.+(%..+)$")
+	end
+
+	local extension = get_extension(tostring(self.file.url))
+
+	if extension == ".ogg" then
+		output = Command("ffmpegthumbnailer")
+			:args({
+				"-q 6",
+				"-s 0",
+				"-c jpeg",
+				"-i",
+				tostring(self.file.url),
+				"-o /dev/stdout",
+			})
+			:stdout(Command.PIPED)
+			:stderr(Command.PIPED)
+			:output()
+	else
+		output = Command("exiftool")
+			:args({
+				"-b",
+				"-Coverart",
+				"-Picture",
+				tostring(self.file.url),
+			})
+			:stdout(Command.PIPED)
+			:stderr(Command.PIPED)
+			:output()
+	end
 
 	if not output then
 		return 0
-		-- elseif not output.status:success() then
-		-- 	local pages = tonumber(output.stderr:match("the last page %((%d+)%)")) or 0
-		-- 	if self.skip > 0 and pages > 0 then
-		-- 		ya.manager_emit(
-		-- 			"peek",
-		-- 			{ tostring(math.max(0, pages - 1)), only_if = tostring(self.file.url), upper_bound = "" }
-		-- 		)
-		-- 	end
-		-- 	return 0
 	end
 
 	return fs.write(cache, output.stdout) and 1 or 2

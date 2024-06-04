@@ -1,13 +1,29 @@
 return {
   -- tex-conceal.nvim for better conceal in tex files
   {
-    "KeitaNakamura/tex-conceal.vim",
-    ft = { "markdown", "tex" },
+    "joelsleeba/tex-conceal.vim",
+    ft = { "markdown", "tex", "norg" },
+    -- enabled = false,
     config = function()
       vim.g.tex_superscripts = "[0-9a-zA-W.,:;+-<>/()=]"
       vim.g.tex_subscripts = "[0-9aehijklmnoprstuvx,+-/().]"
       vim.g.tex_conceal_frac = 1
+      vim.g.tex_conceal_beg = 1
     end,
+  },
+
+  -- rnoweb-nvim for conceal
+  {
+    "joelsleeba/rnoweb-nvim",
+    ft = { "tex", "markdown", "rnoweb", "norg", "latex" },
+    -- commit = "87704c3807e1a8da530915b3d3289041e9b7df11",
+    -- commit = "6863efaa40a18059af463537d093d9a2135a146e",
+    -- commit = "0cf5029e61786759ee8a978a5d97ab1ff7d468a2",
+    enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = true,
   },
 
   -- knap.nvim for compiling tex files with keybindings
@@ -60,7 +76,7 @@ return {
         markdowntopdfviewerlaunch = "sioyek %outputfile%",
         markdowntopdfviewerrefresh = "none",
         texoutputext = "pdf",
-        textopdf = "pdflatex -interaction=batchmode -halt-on-error -synctex=1 %docroot%",
+        textopdf = "latexmk -pdf -halt-on-error -synctex=1 %docroot%",
         textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%",
         textopdfviewerrefresh = "none",
         textopdfforwardjump = "sioyek --inverse-search 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
@@ -97,23 +113,65 @@ return {
     end,
   },
 
+  -- vimtex
+  {
+    "lervag/vimtex",
+    lazy = false, -- we don't want to lazy load VimTeX
+    enabled = false,
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    config = function()
+      vim.g.vimtex_compiler_method = "latexmk"
+      vim.g.vimtex_compiler_latexmk = {
+        callback = 1,
+        continuous = 1,
+        executable = "latexmk",
+        options = {
+          "-pdf",
+          "-shell-escape",
+          "-verbose",
+          "-file-line-error",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+        },
+      }
+      vim.g.vimtex_view_method = "sioyek"
+      vim.g.vimtex_quickfix_ignore_filters = {
+        "Command terminated with space",
+        "LaTeX Font Warning: Font shape",
+        "Package caption Warning: The option",
+        [[Underfull \\hbox (badness [0-9]*) in]],
+        "Package enumitem Warning: Negative labelwidth",
+        [[Overfull \\hbox ([0-9]*.[0-9]*pt too wide)]],
+        [[Package caption Warning: Unused \\captionsetup]],
+        "Package typearea Warning: Bad type area settings!",
+        [[Package fancyhdr Warning: \\headheight is too small]],
+        [[Underfull \\hbox (badness [0-9]*) in paragraph at lines]],
+        "Package hyperref Warning: Token not allowed in a PDF string",
+        [[Overfull \\hbox ([0-9]*.[0-9]*pt too wide) in paragraph at lines]],
+      }
+
+      vim.g.vimtex_impags_enabled = false
+    end,
+  },
+
   -- papis.nvim for linking with bibliography manager papis
   {
     "jghauser/papis.nvim",
     dependencies = {
       "kkharji/sqlite.lua",
-      "nvim-lua/plenary.nvim",
+      "pysan3/pathlib.nvim",
+      "nvim-neotest/nvim-nio",
       "MunifTanjim/nui.nvim",
-      "nvim-treesitter/nvim-treesitter",
     },
+    ft = { "tex", "latex" },
     config = function()
       require("papis").setup({
         -- Your configuration goes here
-        papis_python = {
-          dir = "~/Books/Research",
-          info_name = "info.yaml",
-          notes_name = [[notes.md]],
-        },
+        -- papis_python = {
+        --   dir = "~/Books/Research",
+        --   info_name = "info.yaml",
+        --   notes_name = [[notes.md]],
+        -- },
         enable_keymaps = true,
       })
     end,

@@ -18,6 +18,9 @@ if [[ -e $HOME/.config/gtk-4.0 ]] || $(mkdir -p $HOME/.config/gtk-4.0/); then
 fi
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
+# Qt with Kvantum
+kvantummanager --set Gruvbox-Light-Brown
+
 echo "day" >/tmp/color_scheme
 
 # Terminal and Shell

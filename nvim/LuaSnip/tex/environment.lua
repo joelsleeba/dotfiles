@@ -36,18 +36,6 @@ local get_visual = function(args, parent)
   end
 end
 
--- depreciated, often will not work. Use the ls function
-local rec_ls = function()
-  return sn(nil, {
-    c(1, {
-      -- important!! Having the sn(...) as the first choice will cause infinite recursion.
-      t({ "" }),
-      -- The same dynamicNode as in the snippet (also note: self reference).
-      sn(nil, { t({ "", "\t\\item " }), i(1), d(2, rec_ls, {}) }),
-    }),
-  })
-end
-
 local function column_count_from_string(descr)
   -- this won't work for all cases, but it's simple to improve
   -- (feel free to do so! :D )
@@ -115,17 +103,14 @@ return {
 
   -- Define dm snippet for display math
   s(
-    { trig = "([%c%s])dm", wordTrig = false, regTrig = true, priority = -29 },
+    { trig = "dm", wordTrig = true },
     fmta(
       [[
-      <>\[
+      \[
           <>
-        \]
+      \]
       ]],
       {
-        f(function(_, snip)
-          return snip.captures[1]
-        end),
         d(1, get_visual),
       }
     )
@@ -133,22 +118,14 @@ return {
 
   -- Define im snippet for inline math
   s(
-    { trig = "([^%a])im", wordTrig = false, regTrig = true, priority = -29 },
-    fmta("<>$<>$", {
-      f(function(_, snip)
-        return snip.captures[1]
-      end),
+    { trig = "im", wordTrig = true },
+    fmta("$<>$", {
       i(1),
     })
   ),
 
   -- Define qq snippet for quad spacing
-  s(
-    { trig = "([^%a])qq", regTrig = true },
-    f(function(args, snip)
-      return snip.captures[1] .. "\\quad "
-    end, {})
-  ),
+  s({ trig = "qq", regTrig = true }, fmta("\\quad", {})),
 
   -- Define article snippet for latex templates
   s({ trig = "article", desc = "latex template" }, {
@@ -272,9 +249,102 @@ author@emaildomain.com \\
     }),
   }),
 
+  -- Define presentation snippet for presentation templates
+  s(
+    { trig = "presentation", desc = "presentation template", trigEngine = "plain", wordTrig = false },
+    fmta(
+      [[
+\documentclass[dvipsnames]{beamer}
+\usetheme{default}
+
+% Make content that is hidden by pauses "transparent"
+\setbeamercovered{transparent}
+
+% --- Slide layout settings ---
+% Set line spacing
+\renewcommand{\baselinestretch}{1.15}
+
+% Set left and right text margins
+\setbeamersize{text margin left=12mm, text margin right=12mm}
+
+% Add slide numbers in bottom right corner
+\setbeamertemplate{footline}[frame number]
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Allow local line spacing changes
+\usepackage{setspace}
+
+% Change itemized list bullets to circles
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\circ$}
+
+% --- Color and font settings ---
+
+\usepackage{xcolor}
+
+% Slide title background color
+\definecolor{background}{HTML}{ede6d8}
+
+% Slide title text color
+\definecolor{titleText}{HTML}{B40404}
+
+% Set colors
+\setbeamercolor{frametitle}{bg=background, fg=titleText}
+\setbeamercolor{subtitle}{fg=titleText}
+
+% Set font sizes for frame title and subtitle
+\setbeamerfont{frametitle}{size=\fontsize{15}{16}}
+\setbeamerfont{framesubtitle}{size=\small}
+
+% --- Math/Statistics commands ---
+
+% Add a reference number to a single line of a multi-line equation
+% Usage: "\numberthis\label{labelNameHere}" in an align or gather environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% \mathscr{(letter here)} is sometimes used to denote vector spaces
+\usepackage[mathscr]{euscript}
+
+% --- Title slide ---
+
+\title{\color{titleText}<>}
+\subtitle{\color{Blue}<>}
+\author{Joel Sleeba\vspace{-.3cm}}
+\date{\small <>}
+\institute{<>}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+<>
+
+\end{document}
+    ]],
+      { i(1, "Title"), i(2, "Subtitle"), i(3, "date"), i(4, "Institute"), i(0) }
+    )
+  ),
+
+  -- Define frame snippet for presentation frames
+  s(
+    { trig = "frame", desc = "presentation frame", trigEngine = "plain", wordTrig = true },
+    fmta(
+      [[
+\begin{frame}
+  <>
+\end{frame}
+      ]],
+      { i(1) }
+    )
+  ),
+
   -- Define beg snippet for latex begin env
   s(
-    { trig = "beg", desc = "begin environment" },
+    { trig = "beg", desc = "begin environment", trigEngine = "plain", wordTrig = true },
     fmta(
       [[
         \begin{<>}
@@ -282,6 +352,54 @@ author@emaildomain.com \\
         \end{<>}
       ]],
       { i(1, "environment"), i(2), rep(1) }
+    )
+  ),
+
+  -- Define exercise snippet for exercise environment
+  s(
+    { trig = "exercise", desc = "exercise environment", trigEngine = "plain", wordTrig = true },
+    fmta(
+      [[
+        \begin{exercise}[<>]
+          <>
+        \end{exercise}
+      ]],
+      { i(1, "Exercise number"), i(2) }
+    )
+  ),
+
+  -- Define solution snippet for solution environment
+  s(
+    { trig = "solution", desc = "solution environment", trigEngine = "plain", wordTrig = true },
+    fmta(
+      [[
+        \begin{solution}
+          <>
+        \end{solution}
+      ]],
+      { i(1) }
+    )
+  ),
+
+  -- Define eq snippet for equation environment
+  s(
+    { trig = "eq", desc = "equation environment", wordTrig = true, trigEngine = "plain" },
+    fmta(
+      [[
+        \begin{<>}
+          \label{eq:<>}
+          <>
+        \end{<>}
+      ]],
+      {
+        c(1, {
+          t("equation*"),
+          t("equation"),
+        }),
+        i(2, "equation_label"),
+        i(3),
+        rep(1),
+      }
     )
   ),
 
@@ -320,8 +438,10 @@ author@emaildomain.com \\
     )
   ),
 
+  -- Define tabl snippet for making dynamic tables
+  -- Use <c-t> and <c-g> as defined in luasnip.lua change the no.of items
   s(
-    { trig = "tab", desc = "tables" },
+    { trig = "tabl", desc = "tables" },
     fmta(
       [[
       \begin{tabular}{<>}

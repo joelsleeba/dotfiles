@@ -29,6 +29,7 @@ return {
         html = { "prettier" },
         javascript = { "prettier" },
         json = { "prettier" },
+        julia = { "jupytext" },
         latex = { "latexindent" },
         lua = { "stylua" },
         markdown = { "prettier" },
@@ -37,7 +38,7 @@ return {
         tex = { "latexindent" },
         xml = { "xmlformat" },
         yaml = { "prettier" },
-        ["_"] = { "codespell" },
+        -- ["_"] = { "codespell" },
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.
@@ -62,21 +63,21 @@ return {
   -- nvim-lint for linters
   {
     "mfussenegger/nvim-lint",
+    -- enabled = false,
     opts = {
       -- Event to trigger linters
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
         fish = { "fish" },
-        latex = { "vale" },
-        markdown = { "markdownlint-cli2", "markdownlint" },
+        markdown = { "markdownlint" },
         python = { "flake8" },
         lua = { "selene" },
-        -- tex = { "vale" },
+        tex = { "lacheck", "vale" },
         -- Use the "*" filetype to run linters on all filetypes.
         -- ['*'] = { 'global linter' },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
         -- ['_'] = { 'fallback linter' },
-        ["_"] = { "typos" },
+        -- ["_"] = { "typos" },
       },
       -- LazyVim extension to easily override linter options
       -- or add custom linters.
@@ -91,7 +92,10 @@ return {
         --   end,
         -- },
         selene = {
-          prepend_args = { "--allow=mixed_tables" }, -- fix this
+          args = { "--allow=mixed_tables", "--" }, -- fix this
+        },
+        markdownlint = {
+          args = { "--disable", "MD013", "--" },
         },
       },
     },
@@ -174,9 +178,13 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        -- disable = "latex",
+        additional_vim_regex_highlighting = "latex",
+      },
       indent = { enable = true },
-      ensure_installed = { -- For the love of god, don't add latex grammar until it can take care of concealing. Right now it breaks concealing.
+      ensure_installed = { -- For the love of god, don't add highlighting for latex. It breaks concealing.
         "bash",
         "c",
         "diff",
@@ -185,11 +193,13 @@ return {
         "jsdoc",
         "json",
         "jsonc",
+        "latex",
         "lua",
         "luadoc",
         "luap",
-        "markdown",
+        -- "markdown",
         "markdown_inline",
+        "norg",
         "python",
         "query",
         "regex",

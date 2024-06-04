@@ -36,6 +36,13 @@ local get_visual = function(args, parent)
   end
 end
 
+-- To insert space if the character after the snippet exapnsion is a letter
+_G.if_char_insert_space = function()
+  if string.find(vim.v.char, "%a") then
+    vim.v.char = " " .. vim.v.char
+  end
+end
+
 return {
   -- trigger Euler's constant
   s(
@@ -48,7 +55,146 @@ return {
     }, { delimiters = "<>" })
   ),
 
-  -- Define a snippet which expands to a fraction
+  -- Define \0 snippet expands to \emptyset
+  s(
+    { trig = "\\0", desc = "emptyset", trigEngine = "plain", wordTrig = true, snippetType = "autosnippet" },
+    fmta("\\emptyset", {}),
+    {
+      callbacks = {
+        -- index `-1` means the callback is on the snippet as a whole
+        [-1] = {
+          [events.leave] = function()
+            vim.cmd([[
+            autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space()
+          ]])
+          end,
+        },
+      },
+    }
+  ),
+
+  -- Define \8 snippet expands to \infty
+  s(
+    { trig = "\\8", desc = "infty", trigEngine = "plain", wordTrig = true, snippetType = "autosnippet" },
+    fmta("\\infty", {}),
+    {
+      callbacks = {
+        -- index `-1` means the callback is on the snippet as a whole
+        [-1] = {
+          [events.leave] = function()
+            vim.cmd([[
+            autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space()
+          ]])
+          end,
+        },
+      },
+    }
+  ),
+
+  -- Define \- snippet expands to \setminus
+  s(
+    { trig = "\\-", desc = "setminus", trigEngine = "plain", wordTrig = true, snippetType = "autosnippet" },
+    fmta("\\setminus", {}),
+    {
+      callbacks = {
+        -- index `-1` means the callback is on the snippet as a whole
+        [-1] = {
+          [events.leave] = function()
+            vim.cmd([[
+            autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space()
+          ]])
+          end,
+        },
+      },
+    }
+  ),
+
+  -- Define ... snippet expands to \ldots
+  s(
+    { trig = "...", desc = "lower dots", trigEngine = "plain", wordTrig = true, snippetType = "autosnippet" },
+    fmta("\\ldots", {}),
+    {
+      callbacks = {
+        -- index `-1` means the callback is on the snippet as a whole
+        [-1] = {
+          [events.leave] = function()
+            vim.cmd([[
+            autocmd InsertCharPre <buffer> ++once lua _G.if_char_insert_space()
+          ]])
+          end,
+        },
+      },
+    }
+  ),
+
+  -- Define cap snippet that expands to an intersection
+  s(
+    { trig = "cap", desc = "union", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\cap_{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\cap_{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define bcap snippet that expands to a big intersection
+  s(
+    { trig = "bcap", desc = "big intersection", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\bigcap_{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\bigcap_{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define cup snippet that expands to a union
+  s(
+    { trig = "cup", desc = "union", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\cup_{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\cup_{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define bcup snippet that expands to a big union
+  s(
+    { trig = "bcup", desc = "big union", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\bigcup_{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\bigcup_{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define inf snippet that expands to a infimum
+  s(
+    { trig = "inf", desc = "infimum", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\inf{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\inf{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define sup snippet that expands to a supremum
+  s(
+    { trig = "sup", desc = "supremum", trigEngine = "plain", wordTrig = true },
+    c(1, {
+      sn(nil, fmta("\\sup_{<> = <>}^{<>}", { i(1, "n"), i(2, "1"), i(3, "\\infty") })),
+      sn(nil, fmta("\\sup_{<> \\in <>}", { i(1, "n"), i(2, "\\mathbb{N}") })),
+    })
+  ),
+
+  -- Define inv snippet that expands to inverse
+  s(
+    { trig = "([^%s])inv", desc = "inverse", trigEngine = "pattern", wordTrig = false },
+    fmta(
+      [[
+        <>^{-1}
+      ]],
+      { f(function(_, snip)
+        return snip.captures[1]
+      end) }
+    )
+  ),
+
+  -- Define / snippet which expands to a fraction
   s(
     { trig = "(%s)(%g+)/(%g+)", desc = "fraction", regTrig = true, wordTrig = false },
     fmt([[<>\frac{<>}{<>}]], {
@@ -110,15 +256,34 @@ return {
     })
   ),
 
-  -- Define sum snippet which expands to latex code for summation
+  -- Define sum snippet that expands to a summation
   s(
-    { trig = "sum", dscr = "sum over a variable", priority = 1000 },
-    fmta(
-      [[
-          \sum_{<>}^{<>} <>
-        ]],
-      { i(1, "i"), i(2, "n"), i(3, "f(n)") }
-    )
+    { trig = "sum", desc = "summation", trigEngine = "pattern", wordTrig = true },
+    c(1, {
+      sn(
+        nil,
+        fmta("\\sum_{<> \\in <>} <>", {
+          -- f(function(_, snip)
+          --   return snip.captures[1]
+          -- end),
+          i(1, "n"),
+          i(2, "\\mathbb{N}"),
+          i(3, "a_n"),
+        })
+      ),
+      sn(
+        nil,
+        fmta("\\sum_{<> = <>}^{<>} <>", {
+          -- f(function(_, snip)
+          --   return snip.captures[1]
+          -- end),
+          i(1, "i"),
+          i(2, "1"),
+          i(3, "n"),
+          i(4, "a_n"),
+        })
+      ),
+    })
   ),
 
   -- Define trace snippet which expands to a trace
@@ -142,4 +307,7 @@ return {
       { i(1) }
     )
   ),
+
+  -- Define | snippet expands to absolute value
+  s({ trig = "|", desc = "absolute value", trigEngine = "plain", wordTrig = true }, fmta("|<>|", { i(1) })),
 }

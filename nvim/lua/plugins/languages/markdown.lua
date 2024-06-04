@@ -2,7 +2,7 @@ return {
   -- nvim-markdown
   {
     "ixru/nvim-markdown",
-    enabled = true,
+    enabled = false,
     dependencies = { "KeitaNakamura/tex-conceal.vim" },
     ft = "markdown",
 
@@ -18,7 +18,7 @@ return {
   {
     "preservim/vim-markdown",
     branch = "master",
-    enabled = false,
+    enabled = true,
     ft = { "markdown" },
     dependencies = { "godlygeek/tabular" },
   },

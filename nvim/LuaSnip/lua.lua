@@ -70,29 +70,10 @@ return {
       { i(1) }
     )
   ),
+
   -- Define snip snippet which extends to a snippets form
   s({ trig = "snip", dscr = "snippet to snippet" }, {
     c(1, {
-      sn(
-        nil,
-        fmta(
-          [[
-          -- Define <> snippet <>
-          s({ trig = "<>", desc = "<>", regTrig = <>, wordTrig = <> },
-            <>
-          ),
-          ]],
-          {
-            i(1, "snip"),
-            i(2, "that does snip job"),
-            i(3, "trigger"),
-            i(4, "description"),
-            i(5, "false"),
-            i(6, "true"),
-            i(7),
-          }
-        )
-      ),
       sn(nil, {
         t("  -- Define "),
         i(1),
@@ -104,6 +85,33 @@ return {
         i(4),
         t('") } ),'),
       }),
+      sn(
+        nil,
+        fmta(
+          [[
+          -- Define <> snippet <>
+          s({ trig = "<>", desc = "<>", trigEngine = "<>", wordTrig = <> },
+            <>
+          ),
+          ]],
+          {
+            i(1, "snip"),
+            i(2, "that does snip job"),
+            i(3, "trigger"),
+            i(4, "description"),
+            c(5, {
+              t("plain"),
+              t("pattern"),
+              t("ecma"),
+            }),
+            c(6, {
+              t("true"),
+              t("false"),
+            }),
+            i(7),
+          }
+        )
+      ),
     }),
   }),
 
@@ -121,14 +129,14 @@ return {
     }),
   }),
 
-  -- Define choice_node snippet which extends to a choice node in lua
+  -- Define c_node snippet which extends to a choice node in lua
   s(
     { trig = "c_node", dscr = "choice node", priority = 1000 },
     fmta(
       [[
-      {c(<>, {
+      c(<>, {
         <>
-      })},
+      })
       ]],
       { i(1, "1"), i(2) }
     )
@@ -141,7 +149,7 @@ return {
       [[
       sn(<>,
         <>
-      )
+      ),
       ]],
       { i(1, "nil"), i(2) }
     )

@@ -68,3 +68,6 @@ function Status:render(area)
 		table.unpack(Progress:render(area, right:width())),
 	}
 end
+
+-- -- relative motions plugin
+-- require("relative-motions"):setup({ show_numbers = "relative", show_motion = true })

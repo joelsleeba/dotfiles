@@ -11,6 +11,7 @@ return {
   -- vim-slime to copying files over to a repl. Can be replaced by toggleterm.nvim
   {
     "jpalardy/vim-slime",
+    enabled = false,
     lazy = true,
     ft = { "python", "julia", "haskell", "sh" },
     event = { "InsertEnter" },
@@ -26,7 +27,7 @@ return {
   -- toggleterm.nvim for toggling terminals
   {
     "akinsho/toggleterm.nvim",
-    version = "*",
+    -- version = "*",
     keys = {
       {
         "<leader>tc",
@@ -48,7 +49,7 @@ return {
       },
       {
         "<leader>tp",
-        "<cmd>3TermExec cmd='ipython' direction='vertical'<cr>",
+        "<cmd>3TermExec cmd=\"ipython --no-autoindent\" direction='vertical'<cr>",
         desc = "toggle an ipython REPL",
       },
       {
@@ -78,6 +79,7 @@ return {
       shade_terminals = true,
       persist_size = false,
       direction = "horizontal",
+      -- trim_spaces = false,
       size = function(term)
         if term.direction == "horizontal" then
           return 15
@@ -87,5 +89,39 @@ return {
       end,
     },
     config = true,
+  },
+
+  -- luarocks.nvim for rocks packages
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      rocks = { "magick" },
+    },
+  },
+
+  -- image.nvim for displaying images
+  {
+    "3rd/image.nvim",
+    ft = { "markdown", "norg" },
+    dependencies = { "luarocks.nvim" },
+    -- config = function() end,
+    opts = {
+      backend = "kitty",
+      -- integrations = {
+      --   neorg = {
+      --     enabled = true,
+      --     clear_in_insert_mode =
+      --   }
+      -- }
+    },
+  },
+
+  -- nwm for neovim window manager
+  {
+    "altermo/nwm",
+    branch = "x11",
+    enabled = false,
   },
 }

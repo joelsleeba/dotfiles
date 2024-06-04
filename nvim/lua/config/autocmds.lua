@@ -12,23 +12,29 @@ vim.filetype.add({
   pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 })
 
--- Change foldmethod for latex files
+-- Change foldmethod, autopairs for latex files.
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("latex_fold"),
-  pattern = { "tex" },
+  group = augroup("latex"),
+  pattern = { "tex", "latex" },
   callback = function()
-    vim.opt_local.foldmethod = "syntax"
-    vim.opt_local.foldtext = "getline(v:foldstart)"
-    vim.opt_local.foldlevelstart = 2
-    vim.opt_local.foldnestmax = 4
+    vim.opt.foldlevelstart = 0
+    vim.opt.foldlevel = 1
+    vim.opt.foldminlines = 4 -- fold will be closed if the displayed no. of lines when unfolded exceeds this value
+
+    -- vim.cmd([[
+    --   syn region texBoldStyle matchgroup=texTypeStyle start="\\begin\s*{" end="}" concealends contains=@texItalGroup
+    --   syn region texBoldStyle matchgroup=texTypeStyle start="\\end\s*{\a*" end="}" concealends contains=@texItalGroup
+    -- ]])
   end,
 })
---
--- -- Change foldmethod for latex files
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---   group = augroup("lua_fold"),
---   pattern = { "lua" },
---   callback = function()
---     vim.opt_local.foldtext = ""
---   end,
--- })
+
+-- Change foldmethod for norg files. Let Treesitter take care of this too
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("norg_fold"),
+  pattern = { "norg" },
+  callback = function()
+    vim.opt.foldlevelstart = 0
+    vim.opt.foldlevel = 0
+    vim.opt.foldminlines = 2 -- fold will be closed if the displayed no. of lines when unfolded exceeds this value
+  end,
+})

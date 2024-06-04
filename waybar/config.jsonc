@@ -68,7 +68,7 @@
     "max-length": 8,
     "tooltip": false
   },
- 
+
   "mpris": {
     "format": "",
     "format-playing": "{player_icon} {dynamic}",
@@ -131,7 +131,6 @@
     }
   },
 
-
 	"clock": {
 		// "format": "󰅐  {:%H:%M}",
     "format": "{:%H:%M}",
@@ -178,8 +177,8 @@
   },
 
   "privacy": {
-	  "icon-spacing": 4,
-	  "icon-size": 18,
+	  "icon-spacing": 0,
+	  "icon-size": 15,
 	  "transition-duration": 250,
 	  "modules": [
 	  	{
@@ -213,7 +212,7 @@
     // "format-alt": "{bandwidthUpBytes} 󱦴 {bandwidthDownBytes} 󱦶",
     "tooltip-format-ethernet": "{ifname}  {ipaddr}/{cidr}",
     "tooltip-format-wifi": "{ifname}  {essid}  {ipaddr}/{cidr}",
-    "on-click": "hyprctl dispatch exec '[float]$TERM nmtui connect'",
+    "on-click": "pypr toggle nmtui",
     "on-click-right": "rfkill toggle wlan",
     "max-length": 20,
 	},
@@ -229,7 +228,7 @@
 	  "tooltip-format-connected": "{controller_alias}  {controller_address}\n{num_connections} connected\n{device_enumerate}",
 	  "tooltip-format-enumerate-connected": "{device_alias}  {device_address}",
 	  "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_address}  󰥈 {device_battery_percentage}%",
-    "on-click": "hyprctl dispatch exec '[float]$TERM bluetuith'",
+    "on-click": "pypr toggle bluetuith",
     "on-click-right": "rfkill toggle bluetooth"
   },
 
@@ -246,7 +245,7 @@
       "car": "",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "hyprctl dispatch exec '[float]$TERM alsamixer -V all'",
+    "on-click": "pypr toggle alsamixer",
     "on-click-middle": "helvum",
     "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle",
   },
@@ -270,7 +269,7 @@
       "<span color='#FF4000'>▇</span>", // orange
       "<span color='#D61600'>█</span>"  // red
     ],
-    "on-click": "hyprctl dispatch exec '[float]$TERM btop -p 1'",
+    "on-click": "pypr toggle btop-cpu",
   },
 
   "temperature": {
@@ -279,7 +278,7 @@
     "critical-threshold": 60,
     "format": "{icon}{temperatureC}°C",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "hyprctl dispatch exec '[float]$TERM btop -p 1'",
+    "on-click": "pypr toggle btop-cpu",
   },
 
   "memory": {
@@ -290,7 +289,7 @@
     "format": "{percentage}%",
     "tooltip": true,
     "tooltip-format": "{used}GB / {total}GB",
-    "on-click": "hyprctl dispatch exec '[float]$TERM btop -p 3'",
+    "on-click": "pypr toggle btop-memory",
   },
 
 	"battery": {

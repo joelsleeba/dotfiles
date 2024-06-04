@@ -134,14 +134,11 @@ alias ls="eza --icons=auto"
 # alias ll="eza -l --icons=auto"
 # alias la='eza -l -a --icons=auto'
 
-PATH="/home/joel/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/joel/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/joel/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/joel/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/joel/perl5"; export PERL_MM_OPT;
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/texlive/2023/bin/x86_64-linux/:$PATH"
+# PATH="/home/joel/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="/home/joel/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="/home/joel/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"/home/joel/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=/home/joel/perl5"; export PERL_MM_OPT;
 
 # For theme.sh
 if command -v theme.sh > /dev/null; then
@@ -159,7 +156,7 @@ if command -v theme.sh > /dev/null; then
 	alias th='theme.sh -i'
 
 	# Interactively load a light theme
-	alias thl='theme.sh --light -i'
+alias thl='theme.sh --light -i'
 
 	# Interactively load a dark theme
 	alias thd='theme.sh --dark -i'
@@ -168,18 +165,17 @@ fi
 # find and play music with mpd
 if command -v mpc > /dev/null; then
   fzf_mpc_play() {
-    mpc status| grep -q -E "playing|paused" || mpc clear # clear the queue if not currently playing or has an active queue
+    mpc status| grep -q -E "playing|paused" || mpc clear > /dev/null # clear the queue if not currently playing or has an active queue
     files=("${(@f)$(FZF_DEFAULT_COMMAND='fd -i -t file --base-directory /home/joel/Music/'\
               fzf -m \
-              --preview 'exiftool -m -b -Coverart -Picture /home/joel/Music/{}|convert /dev/stdin -resize 320 /dev/stdout |chafa' \
+              --preview 'exiftool -m -b -Coverart -Picture /home/joel/Music/{}|magick /dev/stdin -resize 310 /dev/stdout |chafa' \
               --preview-window 'right,50%,border-rounded,+{2}+3/3,~3')}")
-    echo files
     [[ -n "$files" ]] || return 1
     for file in $files
     do
       mpc add $file
     done
-    mpc play
+    mpc play > /dev/null
   }
 
   alias /m=fzf_mpc_play
@@ -253,6 +249,14 @@ TRAPUSR1
 # Vim keybindings
 bindkey -v
 
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+   echo "$CUTBUFFER" | wl-copy
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

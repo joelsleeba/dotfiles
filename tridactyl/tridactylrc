@@ -28,16 +28,19 @@ set searchurls.gw https://wiki.gentoo.org/index.php?title=Special%3ASearch&profi
 set searchurls.imdb https://www.imdb.com/find?q=%s
 set searchurls.man https://man.archlinux.org/search?q=%s
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js
+set searchurls.mov https://movie-web.us/#/browse/%s
 set searchurls.mstack https://math.stackexchange.com/search?q=%s
 set searchurls.oeis https://oeis.org/search?q=%s
 set searchurls.pdf javascript:void(document.getElementById('viewer').style.filter = 'invert(100%) hue-rotate(180deg)')
+set searchurls.ppd https://piped.video/results?search_query=%s
 set searchurls.pydoc https://docs.python.org/3/search.html?q=%s
 set searchurls.r https://www.reddit.com/search/?q=%s
 set searchurls.r/ https://reddit.com/r/%s
 set searchurls.rtt https://www.rottentomatoes.com/search?search=%s
 set searchurls.shub https://sci-hub.se/%s
-set searchurls.srx https://searx.thegpm.org/?q=%s
+set searchurls.sp https://www.startpage.com/do/search?query=%s
 set searchurls.spt https://open.spotify.com/search/%s
+set searchurls.srx https://searx.thegpm.org/?q=%s
 set searchurls.stkofl https://stackoverflow.com/search?q=%s
 set searchurls.tpb https://thepiratebay.org/s/?q=%s&=on&page=0&orderby=99
 set searchurls.wk https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch

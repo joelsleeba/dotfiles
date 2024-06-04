@@ -5,18 +5,54 @@ return {
     "ellisonleao/gruvbox.nvim",
     opts = {
       terminal_colors = true,
+      undercurl = true,
+      underline = true,
+      bold = true,
+      italic = {
+        strings = true,
+        emphasis = true,
+        comments = true,
+        operators = true,
+        folds = true,
+      },
+      strikethrough = true,
+      -- dim_inactive = true,
       transparent_mode = true,
       contrast = "hard",
+
+      -- Since the gruvbox theme is not fully telescope compatiable
+      overrides = {
+        ["@neorg.markup.italic"] = { italic = true },
+        ["@neorg.markup.strikethrough"] = { strikethrough = true },
+        ["@texItalGroup"] = { italic = true },
+        ["texBoldItalStyle"] = { bold = true, italic = true },
+      },
     },
   },
 
-  -- Configure LazyVim to load gruvbox. Maybe redundant since core.lua line 7
-  -- {
-  --   "LazyVim/LazyVim",
-  --   opts = {
-  --     colorscheme = "gruvbox",
-  --   },
-  -- },
+  -- tokyonight.nvim for colorscheme
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    enabled = false,
+    opts = {
+      style = "night",
+      light_style = "day",
+      terminal_colors = true,
+      transparent = true,
+    },
+  },
+
+  -- kanagawa.nvim for colorscheme
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    enabled = false,
+    opts = {
+      transparent = false,
+      terminalColors = true,
+    },
+  },
 
   -- whichkey.nvim for keymap hints
   {
@@ -35,6 +71,8 @@ return {
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunks" },
+        ["<leader>n"] = { name = "+Neorg" },
+        ["<leader>nj"] = { name = "+journal" },
         ["<leader>p"] = { name = "+paste" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
@@ -262,6 +300,11 @@ return {
           expander_collapsed = "",
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
+        },
+        icon = {
+          folder_closed = "",
+          folder_open = "",
+          folder_empty = "󰜌",
         },
       },
     },

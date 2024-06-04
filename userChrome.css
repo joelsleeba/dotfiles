@@ -1,15 +1,16 @@
 /* /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_main_toolbar.css made available under Mozilla Public License v. 2.0 */
-/* See the above repository for updates as well as full license text. */ */
+/* See the above repository for updates as well as full license text. */
+*/
 /**/
 /* /* This style hides the main toolbar and shows it when the cursor is over the tabs toolbar as well as whenever the focus is inside nav-bar, such as when urlbar is focused. */ */
 /**/
 
-:root{
+:root {
   --uc-navbar-transform: -34px;
   --uc-content-tranform: -40px;
   --toolbarbutton-border-radius: 24px !important;
 }
-:root[uidensity="compact"]{
+:root[uidensity="compact"] {
   --uc-navbar-transform: -28px;
   --uc-content-transform: -34px;
 }
@@ -18,58 +19,75 @@
   appearance: none;
   -moz-default-appearance: -moz-window-titlebar-maximized;
 }
-#navigator-toolbox > div{ display: contents; }
+#navigator-toolbox > div {
+  display: contents;
+}
 /* :root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){ */
 /*   transform: translateY(var(--uc-navbar-transform)) */
 /* } */
 
-:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
+:root:is([customizing], [chromehidden*="toolbar"])
+  :where(
+    #nav-bar,
+    #PersonalToolbar,
+    #tab-notification-deck,
+    .global-notificationbox
+  ) {
   transform: none !important;
   opacity: 1 !important;
 }
 
-#nav-bar:not([customizing]){
+#nav-bar:not([customizing]) {
   transform: translateY(var(--uc-navbar-transform));
   opacity: 0;
-  transition: transform 1200ms ease 0s, opacity 1200ms ease 0s;
+  transition:
+    transform 1200ms ease 0s,
+    opacity 1200ms ease 0s;
   position: relative;
   z-index: 2;
 }
 
-#navigator-toolbox{
+#navigator-toolbox {
   border-bottom: none !important;
 }
 
-#TabsToolbar{
+#TabsToolbar {
   /* position: relative; */
   visibility: collapse;
 }
 
 /* Show when toolbox is focused, like when urlbar has received focus */
-#navigator-toolbox:focus-within > .browser-toolbar{
-  transform: translateY(-1*var(--uc-navbar-transform));
+#navigator-toolbox:focus-within > .browser-toolbar {
+  transform: translateY(-1 * var(--uc-navbar-transform));
   opacity: 1;
-  transition: transform 100ms, opacity 100ms !important;
+  transition:
+    transform 100ms,
+    opacity 100ms !important;
   /* transition-delay: 100ms !important; */
 }
 /* Show when toolbox is hovered */
 #titlebar:hover ~ .browser-toolbar,
 #nav-bar:hover,
-#nav-bar:hover + #PersonalToolbar{
+#nav-bar:hover + #PersonalToolbar {
   opacity: 1;
-  transform: translateY(-1*var(--uc-navbar-transform));
-  transition: transform 100ms, opacity 100ms !important;
+  transform: translateY(-1 * var(--uc-navbar-transform));
+  transition:
+    transform 100ms,
+    opacity 100ms !important;
   /* transition-delay: 100ms !important; */
 }
 
 /* Bookmarks toolbar needs so extra rules */
-#PersonalToolbar{ transition: transform 1600ms ease 1.0s !important; position: relative; z-index: 1 }
+#PersonalToolbar {
+  transition: transform 1600ms ease 1s !important;
+  position: relative;
+  z-index: 1;
+}
 
 /* Move up the content view when using top bar*/
 /* :root[sessionrestored]:not([inFullscreen]) > body > #browser{ margin-top: var(--uc-content-transform); } */
 
-@media (-moz-gtk-csd-available)
-:root[tabsintitlebar] #navigator-toolbox-background {
+@media (-moz-gtk-csd-available) :root[tabsintitlebar] #navigator-toolbox-background {
   appearance: none !important;
   -moz-default-appearance: -moz-window-titlebar-maximized;
 }
@@ -80,8 +98,8 @@ See the above repository for updates as well as full license text. */
 
 /* Moves the main toolbar (#nav-bar) to the bottom of the window */
 
-@-moz-document url(chrome://browser/content/browser.xhtml){
-
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
   /* :root:not([inFullscreen]){ */
   /*   --uc-bottom-toolbar-height: calc(39px + var(--toolbarbutton-outer-padding) ) */
   /* } */
@@ -91,9 +109,11 @@ See the above repository for updates as well as full license text. */
   /* } */
 
   #browser,
-  #customization-container{ margin-bottom: var(--uc-bottom-toolbar-height,0px) }
+  #customization-container {
+    margin-bottom: var(--uc-bottom-toolbar-height, 0px);
+  }
 
-  #nav-bar{
+  #nav-bar {
     position: fixed !important;
     /* bottom: 0px; */
     /* For some reason -webkit-box behaves internally like -moz-box, but can be used with fixed position. display: flex would work too but it breaks extension menus. */
@@ -101,20 +121,25 @@ See the above repository for updates as well as full license text. */
     width: 100%;
     z-index: 1;
   }
-  #nav-bar-customization-target{ -webkit-box-flex: 1; }
+  #nav-bar-customization-target {
+    -webkit-box-flex: 1;
+  }
 
   /* Fix panels sizing */
-  .panel-viewstack{ max-height: unset !important; }
+  .panel-viewstack {
+    max-height: unset !important;
+  }
 
-  #urlbar[breakout][breakout-extend]{
+  #urlbar[breakout][breakout-extend] {
     display: flex !important;
     flex-direction: column-reverse;
     bottom: 0px !important; /* Change to 3-5 px if using compact_urlbar_megabar.css depending on toolbar density */
     top: auto !important;
   }
 
-  .urlbarView-body-inner{ border-top-style: none !important; }
-
+  .urlbarView-body-inner {
+    border-top-style: none !important;
+  }
 }
 
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_navigation_button.css made available under Mozilla Public License v. 2.0
@@ -130,26 +155,35 @@ navigation-buttons in any order
  */
 /* The order of items before urlbar and after navigation-buttons doesn't matter */
 
-:is(#back-button,#forward-button),
-#reload-button{
-  margin-inline-start: -34px !important;
-  visibility:hidden;
-  transition: margin 66ms linear !important
-}
+/* :is(#back-button, #forward-button), */
+/* #reload-button { */
+/*   margin-inline-start: -34px !important; */
+/*   visibility: hidden; */
+/*   transition: margin 66ms linear !important; */
+/* } */
 
-:is(#back-button,#forward-button):hover,
-:is(#back-button,#forward-button):hover ~ :is(#back-button,#stop-reload-button,#forward-button),
-:is(#back-button,#forward-button):hover ~ #stop-reload-button > #reload-button,
-#urlbar-container + toolbarspring:hover ~ :is(#back-button,#forward-button),
+:is(#back-button, #forward-button):hover,
+:is(#back-button, #forward-button):hover
+  ~ :is(#back-button, #stop-reload-button, #forward-button),
+:is(#back-button, #forward-button):hover ~ #stop-reload-button > #reload-button,
+#urlbar-container + toolbarspring:hover ~ :is(#back-button, #forward-button),
 #stop-reload-button:hover > #reload-button,
-#urlbar-container + toolbarspring:hover ~ #stop-reload-button > #reload-button{
+#urlbar-container + toolbarspring:hover ~ #stop-reload-button > #reload-button {
   margin-inline-start: 0px !important;
-  visibility: visible
+  visibility: visible;
 }
 
-#nav-bar-customization-target > #downloads-button { margin-inline-start: 0px !important; visibility: visible !important; }
+#nav-bar-customization-target > #downloads-button {
+  margin-inline-start: 0px !important;
+  visibility: visible !important;
+}
 
-:is(#back-button,#forward-button)[disabled],
-#stop-reload-button > [disabled]{ display: none }
+:is(#back-button, #forward-button)[disabled],
+#stop-reload-button > [disabled] {
+  display: none;
+}
 
-#urlbar-container + toolbarspring{ max-width: 4px !important; min-width: 4px !important; }
+#urlbar-container + toolbarspring {
+  max-width: 4px !important;
+  min-width: 4px !important;
+}
