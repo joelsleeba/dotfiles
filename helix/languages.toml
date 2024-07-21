@@ -1,0 +1,33 @@
+[[language]]
+name = "texlab"
+scope = "source.texlab"
+file-types = ["tex", "bib"]
+language-servers = ["texlab"]
+
+[language-server.texlab]
+auxDirectory = "build"
+
+[language-server.texlab.chktex]
+onOpenAndSave = true
+onEdit = true
+
+[language-server.texlab.forwardSearch]
+executable = "zathura"
+args = [ "--synctex-forward", "%l:%c:%f", "%p" ]
+
+# executable = "okular"
+# args = ["--unique", "file:%p#src:%l%f"]
+
+[language-server.texlab.build]
+forwardSearchAfter = true
+onSave = true
+
+executable = "latexmk"
+args = [
+  "-pdf",
+  "-interaction=nonstopmode",
+  "-synctex=1",
+  "-shell-escape",
+  "-output-directory=build",
+  "%f"
+]

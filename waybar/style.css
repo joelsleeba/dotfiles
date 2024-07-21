@@ -1,0 +1,334 @@
+/* :root{ */
+/*   -- */
+/* } */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Arimo Nerd Font;
+  font-size: 13px;
+  min-height: 0;
+}
+
+@keyframes error-blink {
+  to {
+    background: @theme_bg_color;
+    color: @error_bg_color;
+  }
+}
+
+window {
+  /* background: @theme_base_color; */
+  background: transparent;
+  /* padding: 5px 10px; */
+  border-radius: 5px;
+  margin-left: 0px;
+}
+
+window#waybar {
+  background: transparent;
+  color: white;
+}
+
+/* This is for the gradient border around the status bar. */
+/* Refer: https://codyhouse.co/nuggets/css-gradient-borders */
+/* .modules-left, */
+/* .modules-center, */
+/* .modules-right{ */
+/*   background: linear-gradient(@theme_base_color, @theme_base_color) padding-box, linear-gradient(45deg, #33ccff, #00ff99) border-box; */
+/*   margin: 5px 0px; */
+/*   border: 1px solid transparent; */
+/*   border-radius: 5px; */
+/* } */
+
+/* use this for without gradient borders*/
+.modules-left,
+.modules-center,
+.modules-right {
+  color: @accent_color;
+  margin: 0px 0px 5px 0px;
+}
+
+/* Independent standalone modules */
+#image,
+#workspaces,
+#window,
+#submap,
+#mpd,
+#mpris,
+#clock {
+  border-radius: 5px;
+  border: 1px solid @borders;
+  padding: 0px 10px;
+  background: @theme_base_color;
+  /* opacity: 0.7; */
+  /* filter: blur(5px); */
+  /* background: rgb(0,11,255); */
+  /* background: linear-gradient( */
+  /*   90deg, */
+  /*   rgba(0, 11, 255, 1) 0%, */
+  /*   rgba(156, 0, 127, 1) 51%, */
+  /*   rgba(255, 0, 33, 1) 100% */
+  /* ); */
+}
+
+/* Independent standalone modules to the left */
+#image,
+#workspaces,
+#window,
+#submap,
+#mpd,
+#mpris {
+  margin-left: 6px;
+}
+
+#workspaces {
+  padding: 0px; /* Since buttons will take care of padding */
+  /* box-shadow: 0px 0px 2px 0px @theme_fg_color; */
+  margin-left: 22px;
+}
+
+#workspaces button {
+  padding: 0px 6px;
+  min-width: 20px;
+  box-shadow: none;
+}
+
+/* for Sway */
+#workspaces button.focused {
+  /* color: @theme_selected_fg_color; */
+  /* background-color: @theme_selected_bg_color; */
+  color: @theme_selected_bg_color;
+  border-radius: 5px;
+}
+
+/* for Hyprland */
+#workspaces button.active {
+  /* changed when removed the icons for dots */
+  /* color: @theme_selected_fg_color; */
+  /* background-color: @theme_selected_bg_color; */
+  color: @error_color;
+  border-radius: 5px;
+}
+
+#workspaces button.active:hover {
+  /* changed when removed the icons for dots */
+  /* background-color: @theme_selected_bg_color; */
+  /* color: @theme_selected_fg_color; */
+  border-radius: 5px;
+}
+
+#workspaces button:hover button:not(.focused) {
+  background-color: @insensitive_bg_color;
+  color: @theme_unfocused_text_color;
+  border-radius: 5px;
+}
+
+#workspaces .persistent {
+  color: @unfocused_insensitive_color;
+}
+
+#window {
+  background-color: transparent;
+  color: @theme_selected_fg_color;
+}
+
+#window.empty {
+  padding: 0;
+  margin: 0;
+}
+
+#mpris.stopped {
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+#tray,
+#custom-dnd,
+#privacy,
+#idle_inhibitor,
+#network,
+#bluetooth,
+#pulseaudio,
+#pulseaudio-slider,
+#cpu,
+#temperature,
+#memory,
+#battery {
+  background-color: @theme_base_color;
+  padding: 5px 6px;
+  border-top: 1px solid @borders;
+  border-bottom: 1px solid @borders;
+}
+
+/* Terminal modules of independent islands in left*/
+#tray,
+#idle_inhibitor,
+#battery {
+  margin-right: 6px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-right: 1px solid @borders;
+  padding-right: 12px;
+}
+
+#battery {
+  margin-right: 22px;
+}
+
+/* Initial modules of independent island in left */
+#tray,
+#custom-dnd,
+#network {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left: 1px solid @borders;
+  padding-left: 12px;
+}
+
+/* #pulseaudio-slider{ */
+/*   padding: 0px 6px; */
+/*   min-width: 40px; */
+/* } */
+/**/
+/* #pulseaudio-slider slider { */
+/*     min-height: 2px; */
+/*     min-width: 2px; */
+/*     border-radius: 50%; */
+/*     opacity: 0; */
+/*     background-color: @theme_selected_bg_color; */
+/*     border: none; */
+/*     box-shadow: none; */
+/* } */
+/**/
+/* #pulseaudio-slider trough { */
+/*     min-height: 2px; */
+/*     min-width: 40px; */
+/*     border-radius: 5px; */
+/*     background-color: @theme_bg_color; */
+/*     border: 1px solid @borders */
+/* } */
+/**/
+/* #pulseaudio-slider highlight { */
+/*     min-height: 2px; */
+/*     border-radius: 5px; */
+/*     background-color: @theme_base_color; */
+/*     border: 1px solid @borders */
+/* } */
+
+#cpu {
+  min-width: 4em;
+}
+
+#temperature {
+  color: @error_color;
+}
+
+#temperature.critical {
+  background-color: @error_bg_color;
+  color: @error_fg_color;
+  animation-name: error-blink;
+  animation-duration: 833ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#memory {
+  color: @warning_color;
+}
+
+/* Would've avoided repetition if GTK supported  */
+#memory.warning {
+  background-color: @warning_bg_color;
+  color: @warning_fg_color;
+}
+
+#memory.critical {
+  background-color: @error_bg_color;
+  color: @error_fg_color;
+  animation-name: error-blink;
+  animation-duration: 833ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery {
+  color: @success_color;
+}
+
+#battery.charging {
+  background-color: @success_bg_color;
+  color: @success_fg_color;
+}
+
+#battery.warning:not(.charging) {
+  background-color: @warning_bg_color;
+  color: @warning_fg_color;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @error_bg_color;
+  color: @error_fg_color;
+  /* High cpu usage with animations */
+  /* animation-name: error-blink; */
+  /* animation-duration: 833ms; */
+  /* animation-timing-function: ease-in; */
+  /* animation-iteration-count:infinite; */
+  /* animation-direction: alternate; */
+}
+
+#battery.full {
+  background-color: @success_bg_color;
+  color: @success_fg_color;
+  animation-name: error-blink;
+  animation-duration: 833ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+/* #custom-date { */
+/* 	color: @GRAPE_900; */
+/* } */
+/**/
+/* #custom-power { */
+/* 	color: #24283b; */
+/* 	background-color: #db4b4b; */
+/* 	border-radius: 5px; */
+/* 	margin-right: 10px; */
+/* 	margin-top: 5px; */
+/* 	margin-bottom: 5px; */
+/* 	margin-left: 0px; */
+/* 	padding: 5px 10px; */
+/* } */
+/**/
+/**/
+/* #mpd.playing{ */
+/*   background-color:@success_bg_color; */
+/*   color:@success_fg_color; */
+/* } */
+/**/
+/* #mpd.paused{ */
+/*   background-color:@error_bg_color; */
+/*   color:@error_fg_color; */
+/* } */
+
+/* #clock { */
+/*   color: @accent_color; */
+/* } */
+/**/
+/* #clock.months{ */
+/*   color: @success_bg_color; */
+/* } */
+
+tooltip {
+  padding: 10px;
+  background: @theme_base_color;
+  border: 1px solid @borders;
+}
+
+tooltip label {
+  color: @accent_color;
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+case $1 in
+transition)
+	exec ~/.config/userscripts/themeSwitch.sh
+	;;
+esac

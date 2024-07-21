@@ -1,0 +1,72 @@
+[OperatorAlgebras]
+dir = ~/Books/Research/
+add-file-name = {{ doc['author'] }}-{{ doc['year'] }}-{{ doc['title'] }}
+add-folder-name = {{ doc['author_list'][0]['family'] }},{{ doc['author_list'][0]['given'] }}/{{ doc['year'] }}-{{ doc['title'] }}
+
+[Mathbooks]
+dir = ~/Books/Mathematics
+opentool = ranger
+
+
+
+[settings]
+opentool = rifle
+browser = firefox
+picktool = fzf
+editor = nvim
+file-browser = yazi
+
+formatter = jinja2
+
+database-backend = papis
+whoosh-schema-fields = ['doi', 'ref']
+
+multiple-author-separator = ","
+ref-format = {{ doc['author_list'][0]['family'] }}{{ doc['year'] }}
+
+add-open = False
+add-edit = True
+add-interactive = True
+
+open-marks = True
+
+default-library = OperatorAlgebras
+match-format = {{ doc.html_escape['tags'] }}{{ doc.html_escape['title'] }}{{ doc.html_escape['author'] }}{{ doc.html_escape['year'] }}
+header-format = <span color='#c00000'>{{ doc.html_escape['title'] }}</span> ({{ doc.html_escape['year'] }})
+  <span color='#fd9033'> {{ doc.html_escape['author'] }}</span>
+# header-format = <red>{doc.html_escape[title]}</red>
+#   <span color='#ff00ff'>  {doc.html_escape[author]}</span>
+#   <yellow>   ({doc.html_escape[year]})</yellow
+
+
+# fzf-extra-flags = ["--ansi", "--multi", "-i",
+#                    "--preview", "echo {} | sed -r 's/::/\\n/g; /^ *$/d' | bat --style=plain --color=always",
+#                    "--preview-window", "top:15%%,border-bottom,+{2}+3/3,~3",
+#                    "--color", "hl:-1:underline,hl+:-1:underline:reverse"]
+
+fzf-extra-flags = ["--ansi", "--multi", "-i",
+                   "--color=hl:-1:underline,hl+:-1:reverse:underline:reverse",
+                   "--delimiter=::",
+                   "--preview", "echo {} | sed -r 's/::/\\n/g; /^ *$/d' | bat --style=plain --color=always",
+                   "--preview-window=top:15%%,border-bottom,+{2}+3/3,~3"]
+
+
+
+# This will give the title first full view with aligned spacings and colors stuff
+# It is not colorama, but the spacing adjustments which slows papis open
+# fzf-header-format = {{ c.Fore.MAGENTA }}{%% if doc['title']|length > 90 %%}{{ doc['title'][:87] + '...' }}{%% else %%}{{ doc['title'].ljust(90) }}{%% endif %%}{{ c.Style.RESET_ALL }} :: {{ c.Fore.CYAN }}{%% if doc['author'] %%}{%% set ns=namespace(fam_nam = "") %%}{%% for i in doc['author_list'] %%}{%% set ns.fam_nam = ns.fam_nam+i.get('family') %%}{%% if not loop.last %%}{%% set ns.fam_nam = ns.fam_nam+',' %%}{%% endif %%}{%% endfor %%}{%% if ns.fam_nam|length > 24 %%}{{ns.fam_nam[:21] + '...'}}{%% else %%}{{ns.fam_nam.strip().ljust(24)}}{%% endif %%}{%% elif doc['editor'] %%}{%% for i in doc['editor'].split('and') %%}{{ i.split(', ')[0] }}{%% if not loop.last %%},{%% endif %%}{%% endfor %%}{%% endif %%}{{ c.Style.RESET_ALL }} :: {{ c.Fore.YELLOW }}@{%% if doc['ref']|length > 15 %%}{{ doc['ref'][:12] + '...' }}{%% else %%}{{ doc['ref'].ljust(15) }}{%% endif %%}{{ c.Style.RESET_ALL }} :: {%% if doc['eprintclass']|length > 8 %%}{{ doc['eprintclass'][:5] + '...' }}{%% else %%}{{ doc['eprintclass'].ljust(8) }}{%% endif %%} :: {{ doc['tags'] }}
+
+# same as the one above, but without the colors
+# fzf-header-format = {{ doc['title'][:87] + '...' }} :: {%% set ns=namespace(fam_nam = "") %%}{%% for i in doc['author_list'] %%}{%% set ns.fam_nam = ns.fam_nam+i.get('family') %%}{%% if not loop.last %%}{%% set ns.fam_nam = ns.fam_nam+',' %%}{%% endif %%}{%% endfor %%}{%% if ns.fam_nam|length > 24 %%}{{ns.fam_nam[:21] + '...'}}{%% else %%}{{ns.fam_nam.ljust(24)}}{%% endif %%} :: @{{ doc['ref'].ljust(15) }} :: {{ doc['eprintclass'].ljust(8) }} :: {{ doc['tags'] }}
+
+# Copying papis.nvim telescope search
+fzf-header-format = {{ c.Fore.MAGENTA }}{%% if doc['author'] %%}{%% for i in doc['author_list'] %%}{{ i.get('family') }}{%% if not loop.last %%}{{ ', ' }}{%% endif %%}{%% endfor %%}{%% elif doc['editor'] %%}{%% for i in doc['editor'].split('and') %%}{{ i.split(', ')[0] }}{%% if not loop.last %%}, {%% endif %%}{%% endfor %%}{%% endif %%}{{ c.Style.RESET_ALL }} {{ c.Fore.GREEN }}{%% if doc['year'] %%}({{doc['year']}}){%% endif %%}{{ c.Style.RESET_ALL }} {{ doc['title'] }}
+
+[tui]
+editmode = vi
+move_down_key = J
+move_up_key = K
+move_down_while_info_window_active_key = J
+move_up_while_info_window_active_key = K
+
+# vim: set ft=toml:

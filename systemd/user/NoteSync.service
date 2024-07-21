@@ -1,0 +1,6 @@
+[Unit]
+Description=Systemd Unit to Sync Notes
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/joel/.config/userscripts/NoteSync.sh

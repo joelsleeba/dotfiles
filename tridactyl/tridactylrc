@@ -1,0 +1,60 @@
+set searchengine duckduckgo
+set theme shydactyl
+
+" ---------------- Search URLs ---------------
+set searchurls.add https://addons.mozilla.org/en-US/firefox/search/?q=%s
+set searchurls.alt https://alternativeto.net/browse/search/?q=%s
+set searchurls.amz https://www.amazon.in/s/k=%s
+set searchurls.anna https://annas-archive.org/search?q=%s
+set searchurls.arpk https://archlinux.org/packages/?q=%s
+set searchurls.arwk https://wiki.archlinux.org/index.php?search=%s
+set searchurls.arx https://arxiv.org/search/?query=%s 
+set searchurls.arxpdf https://arxiv.org/pdf/%s.pdf
+set searchurls.aur https://aur.archlinux.org/packages?O=0&K=%s
+set searchurls.bng https://www.bing.com/search?q=%s
+set searchurls.ddg https://duckduckgo.com/html?q=%s
+set searchurls.deb https://packages.debian.org/search?keywords=%s&searchon=names&suite=all&section=all
+set searchurls.doi https://doi.org/%s
+set searchurls.fdroid https://search.f-droid.org/?q=%s
+set searchurls.flipk https://www.flipkart.com/search?q=%s
+set searchurls.fontaw https://fontawesome.com/search?q=%s
+set searchurls.gg https://www.google.com/search?q=%s
+set searchurls.ggi https://www.google.com/search?q=%s&tbm=isch
+set searchurls.gh https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch
+set searchurls.ghr https://github.com/%s
+set searchurls.git https://git-scm.com/search/results?search=%s
+set searchurls.gmap https://www.google.com/maps/search/%s
+set searchurls.gw https://wiki.gentoo.org/index.php?title=Special%3ASearch&profile=default&search=%s&fulltext=Search
+set searchurls.imdb https://www.imdb.com/find?q=%s
+set searchurls.man https://man.archlinux.org/search?q=%s
+set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js
+set searchurls.mov https://movie-web.us/#/browse/%s
+set searchurls.mstack https://math.stackexchange.com/search?q=%s
+set searchurls.oeis https://oeis.org/search?q=%s
+set searchurls.pdf javascript:void(document.getElementById('viewer').style.filter = 'invert(100%) hue-rotate(180deg)')
+set searchurls.ppd https://piped.video/results?search_query=%s
+set searchurls.pydoc https://docs.python.org/3/search.html?q=%s
+set searchurls.r https://www.reddit.com/search/?q=%s
+set searchurls.r/ https://reddit.com/r/%s
+set searchurls.rtt https://www.rottentomatoes.com/search?search=%s
+set searchurls.shub https://sci-hub.se/%s
+set searchurls.sp https://www.startpage.com/do/search?query=%s
+set searchurls.spt https://open.spotify.com/search/%s
+set searchurls.srx https://searx.thegpm.org/?q=%s
+set searchurls.stkofl https://stackoverflow.com/search?q=%s
+set searchurls.tpb https://thepiratebay.org/s/?q=%s&=on&page=0&orderby=99
+set searchurls.wk https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch
+set searchurls.yt https://www.youtube.com/results?search_query=%s
+
+--------- Extensions on Mozilla Pages -----------
+command fixamo_quiet jsb tri.excmds.setpref("privacy.resistFingerprinting.block_mozAddonManager", "true").then(tri.excmds.setpref("extensions.webextensions.restrictedDomains", '""'))
+command fixamo js tri.excmds.setpref("privacy.resistFingerprinting.block_mozAddonManager", "true").then(tri.excmds.setpref("extensions.webextensions.restrictedDomains", '""').then(tri.excmds.fillcmdline_tmp(3000, "Permissions added to user.js. Please restart Firefox to make them take affect.")))
+
+-------- Keybindings --------
+ bind / fillcmdline find
+ bind ? fillcmdline find --reverse
+ bind n findnext --search-from-view
+ bind N findnext --search-from-view --reverse
+ bind gn findselect
+ bind gN composite findnext --search-from-view --reverse; findselect
+ bind <Escape> nohlsearch
