@@ -21,17 +21,29 @@ Here are the config files of various applications that I use.
 |Audio Visualizer | cava |
 
 # Screenshots
+<p float="left">
+  <img src="./images/Gruv-night-lock.jpg" width="49%" />
+  <img src="./images/Gruv-day-lock.jpg" width="49%" />
+</p>
+<p float="left">
+  <img src="./images/Gruv-night-latex.jpg" width="49%" />
+  <img src="./images/Gruv-day-latex.jpg" width="49%" />
+</p>
+<p float="left">
+  <img src="./images/Gruv-night-scratchpad.jpg" width="49%" />
+  <img src="./images/Gruv-day-scratchpad.jpg" width="49%" />
+</p>
+<p float="left">
+  <img src="./images/Gruv-night-yazi.jpg" width="49%" />
+  <img src="./images/Gruv-day-yazi.jpg" width="49%" />
+</p>
+<p float="left">
+  <img src="./images/Gruv-night-firefox.jpg" width="49%" />
+  <img src="./images/Gruv-day-firefox.jpg" width="49%" />
+</p>
+<p float="left">
+  <img src="./images/Gruv-night-wall.jpg" width="49%" />
+  <img src="./images/Gruv-day-wall.jpg" width="49%" />
+</p>
 
-![](./images/Gruv-night-lock.jpg)
-![](./images/Gruv-night-latex.jpg)
-![](./images/Gruv-night-scratchpad.jpg)
-![](./images/Gruv-night-yazi.jpg)
-![](./images/Gruv-night-firefox.jpg)
-![](./images/Gruv-night-wall.jpg)
 
-![](./images/Gruv-day-lock.jpg)
-![](./images/Gruv-day-latex.jpg)
-![](./images/Gruv-day-scratchpad.jpg)
-![](./images/Gruv-day-yazi.jpg)
-![](./images/Gruv-day-firefox.jpg)
-![](./images/Gruv-day-wall.jpg)
