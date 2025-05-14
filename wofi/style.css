@@ -1,0 +1,48 @@
+*{
+    font-family: monokai Nerd Font;
+    outline-style: none;
+}
+
+window {
+    background-color: @theme_base_color;
+    border-radius: 5px;
+    color: @theme_text_color;
+}
+
+#input {
+    border-radius: 0px;
+    border-bottom: 2px solid @theme_selected_bg_color;
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+#inner-box {
+    background-color: @theme_base_color;
+}
+
+#outer-box {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid @theme_selected_bg_color;
+    background-color: @theme_base_color;
+}
+
+#scroll {
+}
+
+#text {
+    padding: 5px;
+}
+
+#entry{
+    padding: 0px;
+}
+
+#entry:selected {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    border: none;
+}
+
+#text:selected {
+}

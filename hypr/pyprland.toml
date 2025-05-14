@@ -1,0 +1,73 @@
+[pyprland]
+plugins = ["scratchpads"]
+
+[scratchpads.term]
+animation = "fromBottom"
+command = "foot -T dropterm"
+class = "dropterm"
+position = "25% 50%"
+size = "50% 45%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+[scratchpads.ncspot]
+animation = "fromBottom"
+command = "foot -T dropterm ncspot"
+class = "dropterm"
+position = "25% 50%"
+size = "50% 45%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+[scratchpads.nmtui]
+animation = "fromBottom"
+command = "foot -T dropterm nmtui connect"
+class = "dropterm"
+position = "60% 60%"
+size = "39% 35%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+[scratchpads.bluetuith]
+animation = "fromBottom"
+command = "foot -T dropterm bluetuith"
+class = "dropterm"
+position = "60% 60%"
+size = "39% 35%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+[scratchpads.alsamixer]
+animation = "fromBottom"
+command = "foot -T dropterm alsamixer -V all"
+class = "dropterm"
+position = "60% 60%"
+size = "39% 35%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+[scratchpads.btop-cpu]
+animation = "fromBottom"
+command = "foot -T dropterm btop -p 4"
+class = "dropterm"
+position = "60% 60%"
+size = "39% 35%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50
+
+
+[scratchpads.btop-memory]
+animation = "fromBottom"
+command = "foot -T dropterm btop -p 3"
+class = "dropterm"
+position = "60% 60%"
+size = "39% 35%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 50

@@ -1,0 +1,9 @@
+set selection-clipboard clipboard
+set continuous-hist-save true
+set database sqlite
+
+# Theme
+set default-bg "#111"
+set recolor-darkcolor "#FFF"
+set recolor-lightcolor "#181818"
+set guioptions ''
