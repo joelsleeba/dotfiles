@@ -1,0 +1,27 @@
+[pyprland]
+plugins = ["scratchpads", "menubar"]
+
+# [waybar]
+# command = "waybar"
+# monitors = ["DP-1", "eDP-1", "HDMI-1", "HDMI-1-A"]
+
+[scratchpads.dropterm]
+animation = "fromBottom"
+command = "foot -T dropterm"
+class = "dropterm"
+position = "25% 50%"
+size = "50% 45%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 5
+
+[scratchpads.ncspot]
+animation = "fromBottom"
+command = "foot -T dropterm ncspot"
+class = "spotify"
+position = "25% 50%"
+size = "50% 45%"
+max_size = "1920px 100%"
+unfocus = "hide"
+margin = 5
+

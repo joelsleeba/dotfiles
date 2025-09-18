@@ -1,0 +1,16 @@
+set selection-clipboard clipboard
+set continuous-hist-save true
+set database sqlite
+
+# Theme
+set default-bg "#1d2021"
+set recolor true
+set recolor-darkcolor "#f9f5d7"
+# set recolor-keephue true
+set recolor-lightcolor "#181818"
+# set recolor-reverse-video true
+set guioptions ''
+
+# Smooth Scrolling
+map j feedkeys "<C-Down>"
+map k feedkeys "<C-Up>"

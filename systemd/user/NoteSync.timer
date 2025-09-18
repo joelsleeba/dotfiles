@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer for the NoteSync systemd service
+
+[Timer]
+OnUnitActiveSec=300s
+OnBootSec=300s
+
+[Install]
+WantedBy=timers.target

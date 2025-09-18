@@ -1,0 +1,118 @@
+
+[mgr]
+sort_by        = "natural"
+linemode       = "mtime"
+
+[preview]
+max_width       = 600
+max_height      = 720
+cache_dir       = "~/.cache/yazi"
+image_filter    = "linear"
+
+
+[opener]
+edit = [
+	{ run = 'nvim "$@"', desc = "nvim", block = true, for = "unix" },
+	{ run = 'code %*',    orphan = true, desc = "code",           for = "windows" },
+	{ run = 'code -w %*', block = true,  desc = "code (block)",   for = "windows" },
+]
+image = [
+  { run = 'imv "$@"', desc = "Open in imv" },
+	# { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$1"',                desc = "XDG Open", for = "linux" },
+	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
+	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+]
+document = [
+  { run = 'zathura "$@"', desc = "Zathura", orphan=true },
+  { run = 'sioyek "$@"', desc = "Sioyek", orphan=true },
+]
+font = [
+  { run = 'cp "$@" ~/.local/share/fonts/ && fc-cache -vf', desc = "Install font" },
+]
+reveal = [
+	# { run = 'xdg-open "$(dirname "$1")"',           desc = "XDG-Reveal", for = "linux" },
+	{ run = 'open -R "$1"',                         desc = "Reveal", for = "macos" },
+	{ run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
+	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+]
+extract = [
+	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+	{ run = 'ya pub extract --list %*',   desc = "Extract here", for = "windows" },
+]
+audio = [
+	{ run = 'mpv --no-video "$@"', orphan = true, for = "unix" },
+	{ run = 'mpv --no-video %*', orphan = true, for = "windows" },
+	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+]
+mpd = [
+  {run = 'rmpc add $(echo "$@" | sed -n -e "s/^.*Music\///p"); mpc play', desc = "mpd"}
+]
+video = [
+	{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+	{ run = 'mpv --force-window %*', orphan = true, for = "windows" },
+	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+  { name = "~/Music/*.{mp3,m4a,ogg}", use = [ "mpd" ] },
+]
+append_rules= [
+	{ name = "*.{epub, djvu, ps}", use = ["document", "reveal"] },
+	{ mime = "image/vnd.djvu", use = ["document", "reveal"] },
+]
+rules = [
+	# Folder
+	{ name = "*/", use = [ "edit", "open", "reveal" ] },
+	# Text
+	{ mime = "text/*", use = [ "edit", "reveal" ] },
+  #Document
+	{ mime = "application/pdf", use = ["document", "reveal"] },
+	# Image
+	{ mime = "image/*", use = [ "image", "open", "reveal" ] },
+	# Audio
+	{ mime = "{audio}/*", use = [ "mpd", "audio", "reveal" ] },
+	# Video
+	{ mime = "{video}/*", use = [ "video", "reveal" ] },
+	# Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
+	# JSON
+	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
+	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
+	# Empty file
+	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
+  # Font
+	{ mime = "*font*", use = ["font", "reveal"] },
+	# Fallback
+	{ name = "*", use = [ "open", "reveal" ] },
+]
+
+[plugin]
+  prepend_preloaders = [
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo" },
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator
+    { mime = "application/postscript", run = "mediainfo" },
+  ]
+  prepend_previewers = [
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo"},
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator
+    { mime = "application/postscript", run = "mediainfo" },
+  ]
+
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*"
+run  = "git"
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*/"
+run  = "git"

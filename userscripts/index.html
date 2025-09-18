@@ -1,0 +1,102 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Heartbeat</title>
+    <style>
+      body{
+        margin:0px;
+        height:100%;
+        width:100%;
+       }
+       
+      .center-base-container{
+        height:300px;
+        width:300px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      @media (min-width:480px) and (min-height:480px){
+        .center-base-container{
+            width: 360px;
+            height: 360px;
+        }
+      }
+      
+      @media (min-width:720px) and (min-height:720px){
+        .center-base-container{
+            width: 550px;
+            height: 550px;
+        }
+      }
+      
+      @media (min-width:1000px) and (min-height:1000px){
+        .center-base-container{
+            width: 800px;
+            height: 800px;
+        }
+      }
+
+   /*   
+     body {
+        background: #ec0101;
+      }
+      
+      .center-base-container{
+        background:#150a0a;
+      }
+    */  
+
+      .a{
+        width:100%;
+        height:100%;
+        display:grid;
+        place-items: center;
+      }
+      
+      .obj{
+        height:50%;
+        width:50%;
+        background:#ec0101;
+        animation: heartbeat 833ms ease-out infinite;
+      }
+
+      @keyframes heartbeat{
+        /* Atrium at rest */
+        0%{
+          clip-path: polygon(0 0, 100% 0, 96.66% 98.33%, 3.33% 98.33%);
+        }
+        6.25%{ 
+          clip-path: polygon(2.33% 1.16%, 97.66% 1.16%, 97.36% 98.68%, 2.64% 98.68%);
+        }
+        /* Atrium at max compression */
+        12.5%{
+          clip-path: polygon(5% 2.5%, 95% 2.5%, 98.04% 99.03%, 1.94% 99.03%);
+        }
+        /* Ventricle at rest */
+        25%{
+          clip-path: polygon(4.1% 2.05%, 95.9% 2.05%, 100% 100%, 0 100%);
+        }
+        30%{
+          clip-path: polygon(4% 2%, 96% 2%, 96.32% 98.15%, 3.68% 98.85%);
+        }
+        /* Ventricle at max compression */
+        40%{ 
+          clip-path: polygon(3.4% 1.7%, 96.6% 1.7%, 90% 95%, 10% 95%);
+        }
+        100%{
+          clip-path: polygon(0 0, 100% 0, 96.66% 98.33%, 3.33% 98.33%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-base-container">
+      <div class="a">
+        <div class="obj"></div>
+      </div>
+    </div>
+  </body>
+</html>

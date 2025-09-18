@@ -1,0 +1,10 @@
+[Unit]
+Description=Auto-pause other players when a new player starts via playerctl
+After=graphical.target
+
+[Service]
+ExecStart=%h/.config/userscripts/playerctl-autopause-players.sh
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

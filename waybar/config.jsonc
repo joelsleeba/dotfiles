@@ -1,0 +1,335 @@
+{
+  "position": "bottom",
+  "interval": 1,
+  "height": 20,
+  "layer": "top",
+  "mode" : "hide",
+  "start_hidden" : true,
+  "modules-left": ["hyprland/workspaces", "hyprland/submap", "mpris"],
+  "modules-center": ["clock"],
+  "modules-right": ["tray", "custom/zeit", "custom/dnd", "privacy", "idle_inhibitor", "network", "bluetooth", "pulseaudio", "cpu", "power-profiles-daemon", "temperature", "memory", "battery"],
+  "reload_style_on_change": true,
+
+  "user": {
+    "format": "{user} (up {work_d} days ↑)",
+    "avatar": "$HOME/.config/userscripts/icons/Arch.png",
+    "height": 20,
+    "width": 20,
+    "icon": true,
+  },
+
+  "image": {
+  	"path": "$HOME/.config/userscripts/icons/Arch.png",
+    "size": 20,
+  	"on-click": "",
+  },
+
+  "hyprland/workspaces": {
+    "sort-by-number": true,
+    "smooth-scrolling-threshold": 3,
+    "disable-scroll-wraparound": true,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+	  "all-outputs": false,
+	  "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "",
+      // "1": "",
+      // "2": "󰖟",
+      // "3": "",
+      // "4": "󰧮",
+      // "5": "",
+      // "6": "󰕼",
+      // "7": "󰝚",
+      // "8": "",
+      // "9": "",
+      // "10": "󰖲",
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 20,
+    "separate-outputs": true
+  },
+
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 8,
+    "tooltip": false
+  },
+
+  "mpris": {
+    "format": "",
+    "format-playing": "{player_icon} {dynamic}",
+	  "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "format-stopped": "",
+    //"interval": 1, // Don't do interval, it will flood with script runs. Internally configured to respond to playerctl events.
+    "title-len": 35,
+    "dynamic-len": 45,
+    "dynamic-order": ["title", "artist", "album"],
+    "dynamic-importance-order": ["title", "artist", "album", "position", "length"],
+    "dynamic-separator": " | ",
+	  "player-icons": {
+		  "default": "▶",
+      "mpd": "🎵",
+      "ncspot": "󰝚",
+	  },
+	  "status-icons": {
+		  "paused": ""
+	  },
+    "tooltip" : true,
+    "tooltip-format" : "{artist} | {album}",
+    "tooltip-format-stopped": "",
+    // "ignored-players": ["firefox"]
+  },
+
+  "mpd":  {
+    //	  "server": ,
+    "format": "{stateIcon}   {title}",
+    "format-disconnected": "",
+    "format-stopped": "",
+    "on-click": "mpc toggle",
+    "state-icons": {
+      "playing": "󰝚",
+      "paused": "",
+    },
+    "tooltip": true,
+    "tooltip-format": "{artist} | {album}",
+  },
+
+  "cava": {
+    "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+    "framerate": 30,
+    "autosens": 1,
+    "sensitivity": 100,
+    "bars": 14,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "method": "pipewire",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+    "actions": {
+      "on-click-right": "mode"
+    }
+  },
+
+	"clock": {
+		// "format": "󰅐  {:%H:%M}",
+    "format": "{:%H:%M}",
+    "timezones": ["US/Central", "Asia/Kolkata"],
+    // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "format-alt": "{:%a, %d %b %Y}",
+    "calendar": {
+      "mode"          : "month",
+      "mode-mon-col"  : 3,
+      // "weeks-pos": "right",
+      "on-scroll"     : 1,
+      "format": {
+        "months":     "<b>{}</b>",
+        "days":       "<span><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#f28b82'><b>{}</b></span>",
+        "today":      "<span color='#f28b82'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions":  {
+      "on-click-right": "mode",
+      "on-click-forward": "shift_up",
+      "on-click-backward": "shift_down",
+      "on-scroll-down": "tz_up",
+      "on-scroll-up": "tz_down"
+    },
+    "smooth-scrolling-threshold": 3
+	},
+
+  "tray" : {
+    "icon-size" : 15,
+    "show-passive-items" : true,
+    "spacing" : 10,
+  },
+
+  "custom/zeit": {
+    "format": "{}",
+    "exec": "~/.config/waybar/modules/zeit.sh",
+    "on-click": "~/.config/waybar/modules/zeit.sh click",
+    "interval": 10
+  },
+
+  "custom/potato": {
+    "exec": "potd -fN",
+    "on-click": "potctl -t",
+    "on-click-right": "potctl -r"
+  },
+
+  "custom/dnd": {
+    "exec" : "$HOME/.config/waybar/modules/dnd.sh",
+    "on-click" : "$HOME/.config/userscripts/toggle-dnd.sh",
+    "exec-on-event" : true,
+    //"return-type": "json",
+    "interval": "once",
+    "signal": 11,
+  },
+
+  "privacy": {
+	  "icon-spacing": 0,
+	  "icon-size": 15,
+	  "transition-duration": 250,
+	  "modules": [
+	  	{
+	  		"type": "screenshare",
+	  		"tooltip": true,
+	  		"tooltip-icon-size": 24
+	  	},
+	  	{
+	  		"type": "audio-in",
+	  		"tooltip": true,
+	  		"tooltip-icon-size": 24
+	  	}
+	  ]
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+
+	"network": {
+    "format-wifi": "{icon} {essid}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀",
+    "format-linked": "{ifname} (No IP) 󰈀",
+    "format-disconnected": "󰤮",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    // "format-alt": "{bandwidthUpBytes} 󱦴 {bandwidthDownBytes} 󱦶",
+    "tooltip-format-ethernet": "{ifname}  {ipaddr}/{cidr}",
+    "tooltip-format-wifi": "{ifname}  {essid}  {ipaddr}/{cidr}",
+    "on-click": "hyprctl dispatch exec [float] foot nmtui",
+    "on-click-right": "rfkill toggle wlan",
+    "max-length": 20,
+	},
+
+  "bluetooth": {
+	  "format-on": "",
+	  "format-connected": "󰂱",
+	  // "format-connected-battery": "󰂱 {device_battery_percentage}%",
+	  // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+	  "tooltip-format": "{controller_alias}  {controller_address}",
+	  "tooltip-format-connected": "{controller_alias}  {controller_address}\n{num_connections} connected\n{device_enumerate}",
+	  "tooltip-format-enumerate-connected": "{device_alias}  {device_address}",
+	  "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_address}  󰥈 {device_battery_percentage}%",
+    "on-click": "hyprctl dispatch exec [float] foot bluetuith",
+    "on-click-right": "rfkill toggle bluetooth"
+  },
+
+	"pulseaudio": {
+		"format": "{icon}{volume}%",
+    "max-volume": "100",
+    "format-muted": "",
+    "format-icons": {
+      "car": "",
+      "default": ["󰕿", "󰖀", "󰕾"],
+      "hands-free": "󰋎",
+      "hdmi": "",
+      "headphone": "󰋋",
+      "headset": "󰋎",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+    },
+    "on-click": "hyprctl dispatch exec [float] foot alsamixer",
+    "on-click-middle": "helvum",
+    "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle",
+  },
+
+  "pulseaudio/slider": {
+      "min": 0,
+      "max": 100,
+      "orientation": "horizontal"
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "{icon0}{icon1}{icon2}{icon3}",
+    "format-icons": [
+      "<span color='#002c7c'>▁</span>", // green
+      "<span color='#00B2CB'>▂</span>", // blue
+      "<span color='#2AD587'>▃</span>", // white
+      "<span color='#8EE80E'>▄</span>", // white
+      "<span color='#FFF400'>▅</span>", // yellow
+      "<span color='#FFA200'>▆</span>", // yellow
+      "<span color='#FF4000'>▇</span>", // orange
+      "<span color='#D61600'>█</span>"  // red
+    ],
+    "on-click": "hyprctl dispatch exec [float] foot btop",
+  },
+
+  "power-profiles-daemon": {
+  "format": "{icon}",
+  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+  "tooltip": true,
+  "format-icons": {
+    "default": "",
+    "performance": "",
+    "balanced": "",
+    "power-saver": ""
+    }
+  },
+
+  "temperature": {
+    "thermal-zone": 0,
+    // "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+    "critical-threshold": 60,
+    "format": "{icon}{temperatureC}°C",
+    "format-icons": ["", "", "", "", ""],
+    "on-click": "hyprctl dispatch exec [float] foot btop",
+  },
+
+  "memory": {
+    "states": {
+      "warning": 80,
+      "critical": 95,
+    },
+    "format": " {percentage}%",
+    "tooltip": true,
+    "tooltip-format": "{used}GB / {total}GB",
+    "on-click": "hyprctl dispatch exec [float] foot btop",
+  },
+
+	"battery": {
+    "states": {
+      "warning": 25,
+      "critical": 15
+    },
+    "interval": 2,
+    "format": "{icon}{capacity}%",
+    "format-charging": "󰂄{capacity}%",
+    "format-plugged": "󰂄{capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-full": "󱈑 {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+	},
+}

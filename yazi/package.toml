@@ -1,0 +1,44 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "a1738e8"
+hash = "1f3dad061209081a6b04dd6ff2cb06c7"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "a1738e8"
+hash = "e0ada736ea676c2bbb3ec705a49526ef"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "61ae795"
+hash = "65d576a76597aac2a428dc7ec0eda2ce"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "a1738e8"
+hash = "dd97eede8e20e59cd2604e8006e470e2"
+
+[[plugin.deps]]
+use = "boydaihungst/simple-mtpfs"
+rev = "ec2547a"
+hash = "c035e6a7488d8a7ecf11e1b098e7f200"
+
+[[plugin.deps]]
+use = "imsi32/yatline"
+rev = "2ecf715"
+hash = "38e2ea4703ea606d4eef574e8e8b8fd7"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "b886025"
+hash = "2143a53182dbbe935a1abd1623424aa5"
+
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "cc12f3f"
+hash = "b92e44ad5004f1b45e5c3d717a60ed24"
+
+[[flavor.deps]]
+use = "bennyyip/gruvbox-dark"
+rev = "91fdfa7"
+hash = "f48f510e5505f5d01e79c4f8257ec5cb"
