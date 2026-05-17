@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp -r ~/.config/ ~/workspace/dotfiles/
+
+cp ~/.zprofile ~/workspace/dotfiles/.zprofile
+cp ~/.zshrc ~/workspace/dotfiles/.zshrc
+cp ~/.zsh_plugins.txt ~/workspace/dotfiles/.zsh_plugins.txt
+cp ~/.p10k.zsh ~/workspace/dotfiles/.p10k.zsh

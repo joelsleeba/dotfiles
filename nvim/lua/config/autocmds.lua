@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "tex", "latex" },
   callback = function()
     vim.opt.foldlevelstart = 0
-    vim.opt.foldlevel = 1
+    vim.opt.foldlevel = 3 -- To prevent autofold everytime I save
     vim.opt.foldminlines = 4 -- fold will be closed if the displayed no. of lines when unfolded exceeds this value
 
     function texExtractSectionContent(inputString)

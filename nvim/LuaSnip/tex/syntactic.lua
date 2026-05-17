@@ -52,12 +52,34 @@ return {
   -- Define counter snippet to set counter
   s(
     { trig = "counter", desc = "to set counter", trigEngine = "plain", wordTrig = true, snippetType = snippet },
-    fmta(
-      [[
+    c(1, {
+      sn(
+        nil,
+        fmta(
+          [[
         \setcounter{<>}{<>}
       ]],
-      { i(1), i(2) }
-    )
+          { i(1), i(2) }
+        )
+      ),
+      sn(
+        nil,
+        fmta(
+          [[
+            \addtocounter{<>}{<>}
+          ]],
+          {
+            c(1, {
+              t("enumi"),
+              t("enumii"),
+              t("enumiii"),
+              t("enumiv"),
+            }),
+            i("2"),
+          }
+        )
+      ),
+    })
   ),
 
   -- Define href snippet for hyperlink

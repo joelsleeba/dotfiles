@@ -1,0 +1,31 @@
+[Default Applications]
+x-scheme-handler/http=helium.desktop
+x-scheme-handler/https=helium.desktop
+x-scheme-handler/chrome=helium.desktop
+text/html=helium.desktop
+application/x-extension-htm=helium.desktop
+application/x-extension-html=helium.desktop
+application/x-extension-shtml=helium.desktop
+application/xhtml+xml=helium.desktop
+application/x-extension-xhtml=helium.desktop
+application/x-extension-xht=helium.desktop
+application/pdf=org.pwmt.zathura.desktop
+video/mp4=mpv.desktop
+x-scheme-handler/readest=readest-handler.desktop
+x-scheme-handler/com.googleusercontent.apps.209390247301-ctpmep68ppfa56r1b8tr35e4qi4p60kq=readest-handler.desktop
+x-scheme-handler/about=helium.desktop
+x-scheme-handler/unknown=helium.desktop
+x-scheme-handler/readest-onedrive=readest-handler.desktop
+
+[Added Associations]
+x-scheme-handler/http=helium.desktop;
+x-scheme-handler/https=helium.desktop;
+x-scheme-handler/chrome=helium.desktop;
+text/html=helium.desktop;
+application/x-extension-htm=helium.desktop;
+application/x-extension-html=helium.desktop;
+application/x-extension-shtml=helium.desktop;
+application/xhtml+xml=helium.desktop;
+application/x-extension-xhtml=helium.desktop;
+application/x-extension-xht=helium.desktop;
+video/mp4=mpv.desktop;

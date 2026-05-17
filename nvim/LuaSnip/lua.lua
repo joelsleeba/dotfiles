@@ -171,4 +171,46 @@ return {
       { i(1) }
     )
   ),
+
+  -- Define keymap snippet for Keymap config in Neovim
+  s(
+    { trig = "keymap", desc = "Keymap config in Neovim", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    c(1, {
+      sn(
+        nil,
+        fmta(
+          [[
+            {
+              "<>",
+              "<>"
+              end,
+              expr = true,
+              silent = true,
+              mode = "i",
+              desc = "<>",
+            },
+          ]],
+          { i(1, "<leader>"), i(2, "<cmd>"), i(3, "description") }
+        )
+      ),
+      sn(
+        nil,
+        fmta(
+          [[
+            {
+              "<>",
+              function()
+                <>
+              end,
+              expr = true,
+              silent = true,
+              mode = "i",
+              desc = "<>",
+            },
+          ]],
+          { i(1, "leader"), i(2, "function body"), i(3, "description") }
+        )
+      ),
+    })
+  ),
 }

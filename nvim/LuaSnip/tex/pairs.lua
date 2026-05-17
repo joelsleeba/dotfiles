@@ -85,12 +85,34 @@ end
 
 return {
   -- these should be inside your snippet-table.
-  pair("(", ")", neg, char_count_same),
+  -- pair("(", ")", neg, char_count_same),
   pair("{", "}", neg, char_count_same),
-  pair("[", "]", neg, char_count_same),
+  -- pair("[", "]", neg, char_count_same),
   -- pair("<", ">", neg, char_count_same),
   -- pair("'", "'", neg, even_count),
   pair("$", "$", neg, even_count),
   pair('"', '"', neg, even_count),
   -- pair("`", "`", neg, even_count),
+
+  -- Define \\[ snippet for [ ] brackets
+  s(
+    { trig = "\\[", desc = "[ ] brackets", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        \left[ <> \right]
+      ]],
+      { i(1) }
+    )
+  ),
+
+  -- Define \\( snippet for ( ) brackets
+  s(
+    { trig = "\\(", desc = "( ) brackets", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        \left( <> \right)
+      ]],
+      { i(1) }
+    )
+  ),
 }

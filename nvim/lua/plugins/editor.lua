@@ -43,7 +43,7 @@ return {
 
   -- mini.hipatterns for colors
   {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     -- event = { "InsertEnter" },
     enabled = false,
   },

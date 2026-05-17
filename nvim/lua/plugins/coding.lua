@@ -1,7 +1,7 @@
 return {
   -- mason.nvim for installer formatters, linters, LSPs
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ui = {
         border = "rounded",
@@ -21,6 +21,9 @@ return {
         quiet = false, -- not recommended to change
         lsp_fallback = true, -- not recommended to change
       },
+
+      format_after_save = {},
+
       ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
         bash = { "shfmt" },
@@ -56,6 +59,9 @@ return {
           -- for hardcord limit of word wrap
           prepend_args = { "--prose-wrap", "always" },
         },
+        ["tex-fmt"] = {
+          prepend_args = { "--nowrap" },
+        },
       },
     },
   },
@@ -70,7 +76,7 @@ return {
       linters_by_ft = {
         -- css = { "stylelint" },
         fish = { "fish" },
-        markdown = { "markdownlint-cli2" },
+        markdown = { "markdownlint" },
         python = { "ruff" },
         lua = { "selene" },
         tex = { "lacheck" },
@@ -95,9 +101,9 @@ return {
         selene = {
           args = { "--allow=mixed_tables", "--" }, -- fix this
         },
-        -- "markdownlint-cli2" = {
-        --   args = { "--disable", "MD013", "--" },
-        -- },
+        markdownlint = {
+          args = { "--disable", "MD013", "MD025", "--" },
+        },
       },
     },
   },
@@ -127,7 +133,7 @@ return {
         enabled = false,
       },
       -- add any global capabilities here
-      capabilities = {},
+      -- capabilities = {},
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified
@@ -158,6 +164,15 @@ return {
         },
         pyright = {
           autostart = false,
+        },
+        harper_ls = {
+          linters = {
+            BoringWords = true,
+            SpelledNumbers = true,
+          },
+          markdown = {
+            dialect = "British",
+          },
         },
       },
       -- you can do any additional lsp server setup here

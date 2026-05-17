@@ -27,7 +27,7 @@ return {
     event = { "User" },
     opts = {},
     -- Optional dependencies
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "nvim-mini/mini.icons" },
   },
 
   -- snacks.nvim for dashboard, indent, terminal

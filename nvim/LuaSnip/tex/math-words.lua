@@ -173,12 +173,12 @@ return {
     )
   ),
 
-  -- Define iff snippet for if and only if
+  -- Define iff snippet for if and only
   s(
-    { trig = "iff", desc = "if and only if", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    { trig = "iff", desc = "if and only", trigEngine = "plain", wordTrig = true, snippetType = snippet },
     fmta(
       [[
-        if and only if
+        if and only
       ]],
       {}
     )
@@ -400,6 +400,17 @@ return {
     fmta(
       [[
         Without loss of generality, assume that
+      ]],
+      {}
+    )
+  ),
+
+  -- Define wrt snippet for with respect to
+  s(
+    { trig = "wrt", desc = "with respect to", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        with respect to
       ]],
       {}
     )

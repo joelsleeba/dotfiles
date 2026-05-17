@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Author: Joel Sleeba
 
-save_dir=$HOME/Pictures/Screenshots
+save_dir="$HOME/Pictures/Screenshots"
+mkdir -p "$save_dir"
 
 mode_options="Selection
 Active Window
@@ -11,32 +12,65 @@ output_options="Clipboard
 /tmp
 Save"
 
-mode=$(echo "$mode_options" | wofi -d --hide-scroll --allow-markup --prompt='Screenshot Mode') && output=$(echo "$output_options" | wofi -d --hide-scroll --allow-markup --prompt='Screenshot Output')
+mode=$(printf "%s\n" "$mode_options" |
+  wofi --insensitive --dmenu --hide-scroll --prompt='Screenshot Mode' |
+  tr -d '\r' | sed 's/[[:space:]]*$//')
 
-sleep 1
+output=$(printf "%s\n" "$output_options" |
+  wofi -d --hide-scroll --prompt='Screenshot Output' |
+  tr -d '\r' | sed 's/[[:space:]]*$//')
 
-if [[ "$mode" == "Selection" ]]; then
-  if [[ "$output" == "Clipboard" ]]; then
-    grim -g "$(slurp)" - | wl-copy -t image/png
-  elif [[ "$output" == "/tmp" ]]; then
-    grim -g "$(slurp)" "/tmp/$(date +%Y.%m.%d-%H%M%S).jpg"
+echo "$mode"
+echo "$output"
+echo "$mode" | od -An -tx1
+echo "$output" | od -An -tx1
+
+timestamp="$(date +%Y.%m.%d-%H%M%S)"
+tmp_file="/tmp/$timestamp.png"
+save_file="$save_dir/$timestamp.png"
+
+copy_cmd='wl-copy -t image/png'
+
+get_active_window_geom() {
+  hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+get_active_monitor() {
+  hyprctl monitors -j | jq -r '.[] | select(.focused) | .name'
+}
+
+case "$mode" in
+Selection)
+  geom="$(slurp -d)" || exit 1
+  ;;
+"Active Window")
+  geom="$(get_active_window_geom)" || exit 1
+  ;;
+"Active Monitor")
+  monitor="$(get_active_monitor)" || exit 1
+  ;;
+esac
+
+case "$output" in
+Clipboard)
+  if [ "$mode" = "Active Monitor" ]; then
+    grim -o "$monitor" - | $copy_cmd
   else
-    grim -g "$(slurp)" "$save_dir/$(date +%Y.%m.%d-%H%M%S).jpg"
+    grim -g "$geom" - | $copy_cmd
   fi
-elif [[ "$mode" == "Active Window" ]]; then
-  if [[ "$output" == "Clipboard" ]]; then
-    grim -g "$(hyprctl activewindow -j | jq -c -r '.at,.size | .[]' | tr '\n' ' ' | sed 's/ /,/1' | sed 's/ /x/2' | sed 's/ /\n/2')" - | wl-copy -t image/png
-  elif [[ "$output" == "/tmp" ]]; then
-    grim -g "$(hyprctl activewindow -j | jq -c -r '.at,.size | .[]' | tr '\n' ' ' | sed 's/ /,/1' | sed 's/ /x/2' | sed 's/ /\n/2')" "/tmp/$(date +%Y.%m.%d-%H%M%S).jpg"
+  ;;
+/tmp)
+  if [ "$mode" = "Active Monitor" ]; then
+    grim -o "$monitor" "$tmp_file"
   else
-    grim -g "$(hyprctl activewindow -j | jq -c -r '.at,.size | .[]' | tr '\n' ' ' | sed 's/ /,/1' | sed 's/ /x/2' | sed 's/ /\n/2')" "$save_dir/$(date +%Y.%m.%d-%H%M%S).jpg"
+    grim -g "$geom" "$tmp_file"
   fi
-else
-  if [[ "$output" == "Clipboaord" ]]; then
-    grim -o $(hyprctl monitors -j | jq -r '.[] | select(.focused)| .name') - | wl-copy -t image/png
-  elif [[ "$output" == "/tmp" ]]; then
-    grim -o $(hyprctl monitors -j | jq -r '.[] | select(.focused)| .name') "/tmp/$(date +%Y.%m.%d-%H%M%S).jpg"
+  ;;
+Save)
+  if [ "$mode" = "Active Monitor" ]; then
+    grim -o "$monitor" "$save_file"
   else
-    grim -o $(hyprctl monitors -j | jq -r '.[] | select(.focused)| .name') "$save_dir/$(date +%Y.%m.%d-%H%M%S).jpg"
+    grim -g "$geom" "$save_file"
   fi
-fi
+  ;;
+esac

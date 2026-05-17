@@ -193,6 +193,47 @@ return {
     )
   ),
 
+  -- Define box snippet for boxitem
+  s(
+    { trig = "box", desc = "boxitem", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        \begin{boxitem}{<>}
+          <>
+        \end{boxitem}
+      ]],
+      { i(1, "black"), i(2) }
+    )
+  ),
+
+  -- Define box-environment snippet for box environment definition
+  s(
+    {
+      trig = "box-environment",
+      desc = "box environment definition",
+      trigEngine = "plain",
+      wordTrig = true,
+      snippetType = snippet,
+    },
+    fmta(
+      [[
+      \newenvironment{boxitem}[1]{%
+        \def\boxcolor{#1}%
+        \setbox0=\vbox\bgroup
+      }{%
+        \egroup
+        {\centering\makebox[0pt]{%
+          \fboxrule=2pt%
+          \color{\boxcolor}%
+          \fbox{\hspace{\leftmargini}\color{black}\box0}}%
+          \par
+        }%
+      }
+      ]],
+      {}
+    )
+  ),
+
   -- Define cases snippet for cases environment
   s(
     { trig = "cases", desc = "cases environment", trigEngine = "plain", wordTrig = true },
@@ -618,9 +659,9 @@ return {
     )
   ),
 
-  -- Define proof snippet for proof
+  -- Define pf snippet for proof
   s(
-    { trig = "proof", desc = "proof", trigEngine = "plain", wordTrig = true },
+    { trig = "pf", desc = "proof", trigEngine = "plain", wordTrig = true },
     fmta(
       [[
         \begin{proof}

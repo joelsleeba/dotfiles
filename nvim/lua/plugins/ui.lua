@@ -43,6 +43,20 @@ return {
     },
   },
 
+  -- rose-pine colorscheme
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    opts = {
+      variant = "dawn", -- auto, main, moon, or dawn
+      dark_variant = "main", -- main, moon, or dawn
+
+      styles = {
+        transparecy = true,
+      },
+    },
+  },
+
   -- catpuccin in gruvbox colors
   {
     "catppuccin/nvim",
@@ -430,6 +444,30 @@ return {
     },
   },
 
+  -- bufferline for listing buffers
+  {
+    "akinsho/bufferline.nvim",
+    keys = {
+      { "<A-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to Buffer 1" },
+      { "<A-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "Go to Buffer 2" },
+      { "<A-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "Go to Buffer 3" },
+      { "<A-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "Go to Buffer 4" },
+      { "<A-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "Go to Buffer 5" },
+      { "<A-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "Go to Buffer 6" },
+      { "<A-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "Go to Buffer 7" },
+      { "<A-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "Go to Buffer 8" },
+      { "<A-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "Go to Buffer 9" },
+      { "<A-$>", "<Cmd>BufferLineGoToBuffer -1<CR>", desc = "Go to Last Buffer" },
+    },
+    opts = {
+      options = {
+        numbers = function(opts)
+          return string.format("%s", opts.ordinal)
+        end,
+      },
+    },
+  },
+
   -- whichkey.nvim for keymap hints
   {
     "folke/which-key.nvim",
@@ -549,9 +587,55 @@ return {
     end,
   },
 
+  -- yazi.nvim for yazi
+  {
+    "mikavilpas/yazi.nvim",
+    version = "*", -- use the latest stable version
+    event = "VeryLazy",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", lazy = true },
+    },
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "<leader>e",
+        mode = { "n", "v" },
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>E",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        "<c-up>",
+        "<cmd>Yazi toggle<cr>",
+        desc = "Resume the last yazi session",
+      },
+    },
+    ---@type YaziConfig | {}
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false, -- for oil.nvim
+      keymaps = {
+        show_help = "<f1>",
+      },
+    },
+    -- 👇 if you use `open_for_directories=true`, this is recommended
+    init = function()
+      -- mark netrw as loaded so it's not loaded at all.
+      --
+      -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+      vim.g.loaded_netrwPlugin = 1
+    end,
+  },
+
   -- neotree.nvim for file, git, and buffer explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false, -- use yazi instead
     opts = {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },

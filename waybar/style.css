@@ -5,8 +5,8 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Arimo Nerd Font;
-  font-size: 13px;
+  font-family: Iosevka Nerd Font;
+  font-size: 12px;
   min-height: 0;
 }
 
@@ -54,9 +54,7 @@ window#waybar {
 #workspaces,
 #window,
 #submap,
-#mpd,
-#mpris,
-#clock {
+#mpd {
   border-radius: 5px;
   border: 1px solid @borders;
   padding: 0px 10px;
@@ -73,19 +71,19 @@ window#waybar {
 }
 
 /* Independent standalone modules to the left */
-#image,
-#workspaces,
 #window,
 #submap,
-#mpd,
-#mpris {
+#mpd {
   margin-left: 6px;
+}
+
+#clock {
+  margin-left: 22px;
 }
 
 #workspaces {
   padding: 0px; /* Since buttons will take care of padding */
   /* box-shadow: 0px 0px 2px 0px @theme_fg_color; */
-  margin-left: 22px;
 }
 
 #workspaces button {
@@ -138,12 +136,21 @@ window#waybar {
   margin: 0;
 }
 
+#mpris {
+  border-radius: 5px;
+  border: 0px solid @borders;
+  padding: 0px 10px;
+  background-color: transparent;
+}
+
 #mpris.stopped {
   padding: 0px;
   margin: 0px;
   background-color: transparent;
 }
 
+#clock,
+#custom-weather,
 #tray,
 #custom-potato,
 #custom-zeit,
@@ -166,24 +173,27 @@ window#waybar {
 }
 
 /* Terminal modules of independent islands in left*/
-#tray,
+#custom-weather,
 #custom-potato,
 #custom-zeit,
 #idle_inhibitor,
 #battery {
-  margin-right: 6px;
+  margin-right: 8px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-right: 1px solid @borders;
   padding-right: 10px;
 }
 
-#battery {
+#tray {
+  border-radius: 5px;
+  border: 1px solid @borders;
   margin-right: 22px;
+  padding: 5px 8px;
 }
 
-/* Initial modules of independent island in left */
-#tray,
+/* Initial modules of independent island */
+#clock,
 #custom-potato,
 #custom-zeit,
 #custom-dnd,

@@ -18,7 +18,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99 -- if low the folds close automatically on update
 vim.opt.foldlevelstart = 1 -- foldlevel but only executed on buffer start
-vim.opt.foldnestmax = 4
+vim.opt.foldnestmax = 100
 vim.opt.foldminlines = 4 -- fold will be closed if the displayed no. of lines when unfolded exceeds this value
 vim.opt.fillchars = { eob = "-", fold = "-", foldopen = "", foldclose = "" }
 

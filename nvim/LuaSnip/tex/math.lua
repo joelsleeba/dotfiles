@@ -378,6 +378,28 @@ return {
     )
   ),
 
+  -- Define exp snippet for exponent
+  s(
+    { trig = "exp", desc = "exponent", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        \mathrm{exp}\left( <> \right)
+      ]],
+      { i(1) }
+    )
+  ),
+
+  -- Define floor snippet for floor function
+  s(
+    { trig = "floor", desc = "floor function", trigEngine = "plain", wordTrig = true, snippetType = snippet },
+    fmta(
+      [[
+        \lfloor <> \rfloor
+      ]],
+      { i(1) }
+    )
+  ),
+
   -- Define inf snippet that expands to a infimum
   s(
     { trig = "inf", desc = "infimum", trigEngine = "plain", wordTrig = true },

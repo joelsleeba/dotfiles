@@ -25,7 +25,7 @@ echo "night" >/tmp/color_scheme
 
 # Terminal and Shell
 # theme.sh tokyo-night
-ln -f -s /usr/share/foot/themes/gruvbox-dark ~/.config/foot/color
+ln -f -s /usr/share/foot/themes/gruvbox-dark-hard ~/.config/foot/color
 pkill -USR1 zsh
 
 # Wallpaper
@@ -47,9 +47,9 @@ ln -f -s $HOME/.config/zathura/zathurarc-dark $HOME/.config/zathura/zathurarc
 ln -f -s $HOME/.config/sioyek/prefs_user-dark.config $HOME/.config/sioyek/prefs_user.config
 
 # hyprlock
- ln -f -s $HOME/.config/hypr/hypr.d/hyprlock-dark.conf $HOME/.config/hypr/hyprlock.conf
+ ln -f -s $HOME/.config/hypr/hyprlock.d/hyprlock-dark.conf $HOME/.config/hypr/hyprlock.conf
 
 # set wallpaper at last since it doesn't daemonize
-ln -f -s $HOME/.config/userscripts/walls/gruvbox/dark-samurai.png $HOME/.config/userscripts/walls/wallpaper.png
+ln -f -s $HOME/.config/userscripts/walls/gruvbox/rocky.png $HOME/.config/userscripts/walls/wallpaper.png
 killall swaybg
 swaybg -m fill -i $HOME/.config/userscripts/walls/wallpaper.png

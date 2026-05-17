@@ -212,7 +212,7 @@ return {
     { trig = "([^%s']+)'", desc = "prime accent", trigEngine = "pattern", wordTrig = false, snippetType = "snippet" },
     fmta(
       [[
-        <>^\prime
+        <>^{\prime}
       ]],
       { f(function(_, snip)
         return snip.captures[1]
@@ -232,6 +232,25 @@ return {
     fmta(
       [[
         <>^{\prime\prime}
+      ]],
+      { f(function(_, snip)
+        return snip.captures[1]
+      end) }
+    )
+  ),
+
+  -- Define snippet for triple prime accent
+  s(
+    {
+      trig = "([^%s']+)'''",
+      desc = "triple prime accent",
+      trigEngine = "pattern",
+      wordTrig = false,
+      snippetType = "snippet",
+    },
+    fmta(
+      [[
+        <>^{\prime\prime\prime}
       ]],
       { f(function(_, snip)
         return snip.captures[1]
@@ -313,8 +332,8 @@ return {
   -- Define it snippet for textit
   s({ trig = "it", desc = "italic letters", trigEngine = "plain", wordTrig = true }, fmta("\\textit{<>}", { i(1) })),
 
-  -- Define rm snippet for textrm
-  s({ trig = "rm", desc = "roman letters", trigEngine = "plain", wordTrig = true }, fmta("\\textrm{<>}", { i(1) })),
+  -- Define rm snippet for mathrm
+  s({ trig = "rm", desc = "roman letters", trigEngine = "plain", wordTrig = true }, fmta("\\mathrm{<>}", { i(1) })),
 
   -- Define scr snippet which expands to script letters
   s(

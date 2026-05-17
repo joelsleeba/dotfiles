@@ -363,7 +363,7 @@ return {
 
   -- Disable mini.pairs. LuaSnippets take care of it
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
 }

@@ -389,9 +389,9 @@ Joel Sleeba \\
     )
   ),
 
-  -- Define include snippet to include a file to a root file
+  -- Define incl snippet to include a file to a root file
   s(
-    { trig = "include", desc = "include file", trigEngine = "plain", wordTrig = true },
+    { trig = "incl", desc = "include file", trigEngine = "plain", wordTrig = true },
     fmta(
       [[
         \include{<>/<>.tex}
@@ -400,9 +400,9 @@ Joel Sleeba \\
     )
   ),
 
-  -- Define lecture snippet for a lecture file
+  -- Define lec snippet for a lecture file
   s(
-    { trig = "lecture", desc = "lecture file", trigEngine = "plain", wordTrig = true },
+    { trig = "lec", desc = "lecture file", trigEngine = "plain", wordTrig = true },
     fmta(
       [[
       % TeX_root = ../<>.tex
@@ -416,9 +416,9 @@ Joel Sleeba \\
     )
   ),
 
-  -- Define presentation snippet for presentation templates
+  -- Define pres snippet for presentation templates
   s(
-    { trig = "presentation", desc = "presentation template", trigEngine = "plain", wordTrig = false },
+    { trig = "pres", desc = "presentation template", trigEngine = "plain", wordTrig = false },
     fmta(
       [[
 \documentclass[dvipsnames]{beamer}

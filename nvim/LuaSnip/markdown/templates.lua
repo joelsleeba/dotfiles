@@ -128,15 +128,10 @@ return {
       # Idea
       <>
 
-      # Up
-      <>
-
-      # Down
-      <>
       ]],
       { i(1), i(2), i(3), f(function(_, snip)
         return os.date("%Y%m%d%H%M%S")
-      end), i(4), i(5), i(6) }
+      end), i(4) }
     )
   ),
 }

@@ -26,12 +26,11 @@ return {
   -- math-conceal.nvim for conceal
   {
     "pxwg/math-conceal.nvim",
-    build = "make lua51",
+    event = "VeryLazy",
     main = "math-conceal",
+    -- enabled = false,
     --- @type LaTeXConcealOptions
-    ft = { "tex", "markdown", "norg", "latex" },
     opts = {
-      enabled = true,
       conceal = {
         "greek",
         "script",
@@ -40,7 +39,7 @@ return {
         "delim",
         "phy",
       },
-      ft = { "*.tex", "*.md" },
+      ft = { "plaintex", "tex", "latex", "context", "bibtex", "markdown", "typst" },
     },
   },
 
@@ -94,13 +93,14 @@ return {
         markdowntopdfviewerlaunch = "sioyek %outputfile%",
         markdowntopdfviewerrefresh = "none",
         texoutputext = "pdf",
-        textopdf = "latexmk -pdf -halt-on-error -synctex=1 %docroot%",
+        textopdf = "latexmk -pdf -usepretex -synctex=1 %docroot%",
         textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%",
         textopdfviewerrefresh = "none",
         textopdfforwardjump = "sioyek --inverse-search 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
         -- textopdfviewerlaunch = "zathura --synctex-editor-command 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
         -- textopdfviewerrefresh = "none",
         -- textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
+        -- textopdfviewerlaunch = "lektra --inverse-search 'nvim --headless -c \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%"
         textopdfshorterror = 'A=%outputfile% ; LOGFILE="${A%.pdf}.log" ; rubber-info "$LOGFILE" 2>&1 | head -n 1',
         delay = 1000,
       }
