@@ -1,0 +1,10 @@
+romkatv/powerlevel10k
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zdharma/fast-syntax-highlighting
+
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+
+zsh-users/zsh-history-substring-search

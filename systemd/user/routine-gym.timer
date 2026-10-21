@@ -1,0 +1,14 @@
+
+[Unit]
+Description=Gym reminder
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 17:30:00
+OnCalendar=Mon..Fri *-*-* 17:35:00
+OnCalendar=Mon..Fri *-*-* 17:40:00
+
+AccuracySec=1s
+Unit=routine-gym.service
+
+[Install]
+WantedBy=timers.target

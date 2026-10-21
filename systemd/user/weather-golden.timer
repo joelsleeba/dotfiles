@@ -1,0 +1,10 @@
+[Unit]
+Description=Check for golden hour every 10 minutes in the afternoon
+
+[Timer]
+OnCalendar=*-*-* 15..21:00/10:00
+AccuracySec=30s
+Unit=weather-golden.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Check today's weather at 11:00, 14:00, and 16:00
+
+[Timer]
+OnCalendar=*-*-* 11:00:00
+OnCalendar=*-*-* 14:00:00
+OnCalendar=*-*-* 16:00:00
+AccuracySec=1min
+Unit=weather-today.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Check tomorrow's weather at 20:00, 21:30, and 22:30
+
+[Timer]
+OnCalendar=*-*-* 20:00:00
+OnCalendar=*-*-* 21:30:00
+OnCalendar=*-*-* 22:30:00
+AccuracySec=1min
+Unit=weather-tomorrow.service
+
+[Install]
+WantedBy=timers.target

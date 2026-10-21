@@ -1,0 +1,5 @@
+-- hl.animation({ leaf = "workspaces", enabled = true, speed = 8, bezier = "default" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 10, spring = "default", style = "slide" })
+hl.animation({ leaf = "windows", enabled = true, speed = 10, spring = "default", style = "slide" })
+hl.animation({ leaf = "layers", enabled = true, speed = 10, spring = "default", style = "slide" })
+hl.animation({ leaf = "fade", enabled = 0 })

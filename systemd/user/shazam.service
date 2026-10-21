@@ -1,0 +1,6 @@
+[Unit]
+Description=Systemd Unit to list songs
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/joel/.config/userscripts/shazam.sh -notify

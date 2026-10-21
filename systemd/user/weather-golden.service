@@ -1,0 +1,6 @@
+[Unit]
+Description=Notify me for the golden hour
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/joel/.config/userscripts/weather.sh golden

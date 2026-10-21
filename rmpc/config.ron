@@ -1,0 +1,218 @@
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+    address: "localhost:6600",
+    password: None,
+    theme: Some("theme"),
+    cache_dir: "~/.cache/rmpc",
+    lyrics_dir: "~/Backup/Music",
+    on_song_change: ["~/.config/rmpc/scripts/lyrics_fetch.sh"],
+    volume_step: 5,
+    max_fps: 30,
+    scrolloff: 0,
+    wrap_navigation: false,
+    enable_mouse: true,
+    enable_config_hot_reload: true,
+    status_update_interval_ms: 1000,
+    rewind_to_start_sec: None,
+    reflect_changes_to_playlist: false,
+    select_current_song_on_change: false,
+    browser_song_sort: [Disc, Track, Artist, Title],
+    directories_sort: SortFormat(group_by_type: true, reverse: false),
+    album_art: (
+        method: Auto,
+        max_size_px: (width: 1200, height: 1200),
+        disabled_protocols: ["http://", "https://"],
+        vertical_align: Center,
+        horizontal_align: Center,
+    ),
+    keybinds: (
+        global: {
+            ":":       CommandMode,
+            ",":       VolumeDown,
+            "s":       Stop,
+            ".":       VolumeUp,
+            "<Tab>":   NextTab,
+            "<S-Tab>": PreviousTab,
+            "1":       SwitchToTab("Queue"),
+            "2":       SwitchToTab("Directories"),
+            "3":       SwitchToTab("Artists"),
+            "4":       SwitchToTab("Albums"),   
+            "5":       SwitchToTab("Playlists"),
+            "6":       SwitchToTab("Search"),   
+            "q":       Quit,
+            ">":       NextTrack,
+            "p":       TogglePause,
+            "<":       PreviousTrack,
+            "f":       SeekForward,
+            "z":       ToggleRepeat,
+            "x":       ToggleRandom,
+            "c":       ToggleConsume,
+            "v":       ToggleSingle,
+            "b":       SeekBack,
+            "~":       ShowHelp,
+            "u":       Update,
+            "U":       Rescan,
+            "I":       ShowCurrentSongInfo,
+            "O":       ShowOutputs,
+            "P":       ShowDecoders,
+            "R":       AddRandom,
+        },
+        navigation: {
+            "k":         Up,
+            "j":         Down,
+            "h":         Left,
+            "l":         Right,
+            "<Up>":      Up,
+            "<Down>":    Down,
+            "<Left>":    Left,
+            "<Right>":   Right,
+            "<C-k>":     PaneUp,
+            "<C-j>":     PaneDown,
+            "<C-h>":     PaneLeft,
+            "<C-l>":     PaneRight,
+            "<C-u>":     UpHalf,
+            "N":         PreviousResult,
+            "a":         Add,
+            "A":         AddAll,
+            "r":         Rename,
+            "n":         NextResult,
+            "g":         Top,
+            "<Space>":   Select,
+            "<C-Space>": InvertSelection,
+            "G":         Bottom,
+            "<CR>":      Confirm,
+            "i":         FocusInput,
+            "J":         MoveDown,
+            "<C-d>":     DownHalf,
+            "/":         EnterSearch,
+            "<C-c>":     Close,
+            "<Esc>":     Close,
+            "K":         MoveUp,
+            "D":         Delete,
+            "B":         ShowInfo,
+        },
+        queue: {
+            "D":       DeleteAll,
+            "<CR>":    Play,
+            "<C-s>":   Save,
+            "a":       AddToPlaylist,
+            "d":       Delete,
+            "C":       JumpToCurrent,
+            "X":       Shuffle,
+        },
+    ),
+    search: (
+        case_sensitive: false,
+        mode: Contains,
+        tags: [
+            (value: "any",         label: "Any Tag"),
+            (value: "artist",      label: "Artist"),
+            (value: "album",       label: "Album"),
+            (value: "albumartist", label: "Album Artist"),
+            (value: "title",       label: "Title"),
+            (value: "filename",    label: "Filename"),
+            (value: "genre",       label: "Genre"),
+        ],
+    ),
+    artists: (
+        album_display_mode: SplitByDate,
+        album_sort_by: Date,
+    ),
+    tabs: [
+        (
+            name: "Queue",
+            pane: Split(
+                direction: Horizontal,
+                panes: [
+                    (size: "40%", pane: Pane(AlbumArt)), 
+                    (size: "60%", pane: Split(
+                                      direction: Vertical,
+                                      panes: [(size:"70%", pane: Pane(Queue)), (size:"30%", pane: Pane(Lyrics))])
+                    )],
+            ),
+        ),
+        (
+            name: "Directories",
+            pane: Pane(Directories),
+        ),
+        // (
+        // name: "Browser",
+        // pane: Pane(Browser(
+        //           levels: [
+        //               (
+        //                   // Only tags defined in group_by are available on the first level. Fallback tags
+        //                   // are not supported here, each entry must have exactly one tag.
+        //                   // Multiple group_by entries produce one directory per unique combination of those
+        //                   // tags. sort_by and format must only reference tags defined in group_by.
+        //                   group_by: [[AlbumArtist], [Album], [Other("date")]],
+        //                   sort_by: [[AlbumArtist]],
+        //                   format: [
+        //                       (kind: Property(AlbumArtist), default: (kind: Text("<no artist>"))),
+        //                       (kind: Text(" - ")),
+        //                       (kind: Property(Album)),
+        //                       (kind: Text(" - ")),
+        //                       (kind: Property(Other("date")), default: (kind: Text("<no date>"))),
+        //                   ],
+        //               ),
+        //               (
+        //                   // Group all the songs in a given genre by "albumartist" or "artist" if albumartist is
+        //                   // not present. This will produce a list of all the artist that have some songs with the given genre.
+        //                   group_by: [[AlbumArtist, Artist]],
+        //                   // Sort by the same tags as the grouping.
+        //                   sort_by: [[AlbumArtist, Artist]],
+        //                   // Display the albumartist value, artist if it does not exist and "no artist" for
+        //                   // directory where all songs without either artist or albumartist will be grouped
+        //                   // It is highly recommended to only use properties that are in the "group_by". Otherwise
+        //                   // you might get some unexpected results since the values for the format are taken from
+        //                   // the first song in the group.
+        //                   format: [
+        //                       (kind: Property(AlbumArtist), default: (kind: Property(Artist), default: (kind: Text("no artist")))),
+        //                   ],
+        //                   // Possible values are "Single" and "SingleEmpty"
+        //                   // With "Single", if only one artist is in the directory, this level will be completely
+        //                   // skipped
+        //                   // With "SingleEmpty", if no artist is in the directory, meaning there would be only one
+        //                   // item named "no artist", this level will be completely skipped
+        //                   skip: SingleEmpty,
+        //               ),
+        //               (
+        //                   // Group songs for the artist by "album" and "date" with fallback to "originaldate"
+        //                   group_by: [[Album], [Other("date"), Other("originaldate")]],
+        //                   // Display "(1-1-1900) album name" as the format
+        //                   format: [
+        //                       (kind: Group([
+        //                           (kind: Text("(")),
+        //                           (kind: Property(Other("date"))),
+        //                           (kind: Text(") ")),
+        //                       ])),
+        //                       (kind: Property(Album)),
+        //                   ],
+        //                   // On the last level, skip can have one more value: UnpackEmpty
+        //                   // If this directory would have albumA, albumB and songs without either album or date,
+        //                   // they will be unpacked directly into this level instead of its separate directory.
+        //                   skip: UnpackEmpty,
+        //               ),
+        //           ],
+        //       )),
+        // ) 
+        (
+            name: "Artists",
+            pane: Pane(Artists),
+        ),
+        (
+            name: "Albums",
+            pane: Pane(Albums),
+        ),
+        (
+            name: "Playlists",
+            pane: Pane(Playlists),
+        ),
+        (
+            name: "Search",
+            pane: Pane(Search),
+        ),
+    ],
+)
+

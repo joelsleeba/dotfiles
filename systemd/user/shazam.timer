@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for the shazam service
+
+[Timer]
+OnUnitActiveSec=120s
+OnBootSec=120s
+Unit=shazam.service
+
+[Install]
+WantedBy=timers.target

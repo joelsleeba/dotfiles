@@ -1,0 +1,8 @@
+[Unit]
+Description=Pause other media players when a player starts
+
+[Service]
+Type=simple
+ExecStart=%h/.config/userscripts/playerctl-autopause-players.sh
+Restart=on-failure
+RestartSec=2

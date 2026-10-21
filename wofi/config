@@ -1,0 +1,11 @@
+# exec_search=true
+matching=fuzzy
+# key_hide_search=slash
+#hide_search=true
+# key_expand=Tab
+# line_wrap=word
+
+# dmenu-parse_action=true
+# dmenu-separator=\n
+
+run-always_parse_args=true

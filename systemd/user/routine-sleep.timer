@@ -1,0 +1,21 @@
+[Unit]
+Description=Sleep reminder
+
+[Timer]
+# 23:30 through 23:55
+OnCalendar=*-*-* 23:30/5:00
+
+# Midnight through 00:55
+OnCalendar=*-*-* 00:00/5:00
+
+# 01:00 through 01:55
+OnCalendar=*-*-* 01:00/5:00
+
+OnCalendar=*-*-* 02:00/5:00
+OnCalendar=*-*-* 03:00/5:00
+
+AccuracySec=1s
+Unit=routine-sleep.service
+
+[Install]
+WantedBy=timers.target

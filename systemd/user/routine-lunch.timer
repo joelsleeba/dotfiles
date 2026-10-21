@@ -1,0 +1,13 @@
+[Unit]
+Description=Lunch reminder
+
+[Timer]
+OnCalendar=*-*-* 12:00:00
+OnCalendar=*-*-* 12:05:00
+OnCalendar=*-*-* 12:10:00
+AccuracySec=1s
+
+Unit=routine-lunch.service
+
+[Install]
+WantedBy=timers.target

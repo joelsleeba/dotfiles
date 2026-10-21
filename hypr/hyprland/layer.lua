@@ -1,0 +1,7 @@
+-- -- Fade only the notification layer (dunst) instead of all layers
+-- hl.layer_rule({
+-- 	match = {
+-- 		namespace = "notifications",
+-- 	},
+-- 	animation = "layers",
+-- })
