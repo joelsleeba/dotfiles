@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# author: GPT 6.1-sol
 # Copy selected XDG configs into the directory containing this script.
 # Requires Bash, GNU realpath, rsync, and flock (util-linux).
 # Existing files are updated; removed source files are NOT deleted from the repo.
